@@ -289,13 +289,10 @@ class theme_academy_theme_core_renderer extends \theme_boost\output\core_rendere
                 $context['avg_rating'] = "0.0";
                 $context['recent_reviews'] = [];
                 
-                // Fix #1: Updated to match your exact plugin folder, file, and parameter
                 $context['review_url'] = (new moodle_url('/local/academy_reviews/review.php', ['courseid' => $COURSE->id]))->out(false);
 
-                // Fix #2: Updated to match your exact database table name
                 if ($DB->get_manager()->table_exists('local_academy_reviews')) {
                     
-                    // Fix #3: Removed 'approved' check as it doesn't exist in your install.xml
                     $sql = "SELECT AVG(rating) as avgrating, COUNT(id) as total FROM {local_academy_reviews} WHERE courseid = :courseid";
                     $stats = $DB->get_record_sql($sql, ['courseid' => $COURSE->id]);
                     
@@ -332,7 +329,6 @@ class theme_academy_theme_core_renderer extends \theme_boost\output\core_rendere
                                 'user_name' => fullname($ru),
                                 'user_pic' => $rupic->get_url($PAGE)->out(false),
                                 'stars' => $stars_html,
-                                // Fix #4: Changed from $rev->comments to $rev->reviewtext
                                 'comment' => format_text($rev->reviewtext),
                                 'time_ago' => $time_ago
                             ];
@@ -421,10 +417,38 @@ class theme_academy_theme_core_renderer extends \theme_boost\output\core_rendere
     }
 
     // =========================================================================
-    // 2. ADMIN ONLY - PURGE CACHES BUTTON INJECTION
+    // 2. ADMIN ONLY - PURGE CACHES BUTTON INJECTION & AUTO-EXPAND
     // =========================================================================
     public function standard_after_main_region_html() {
         $html = parent::standard_after_main_region_html();
+        global $PAGE;
+        
+        // --- Auto-expand categories and courses on the Course Index page ---
+        if ($PAGE->pagetype === 'course-index-category' || strpos($_SERVER['REQUEST_URI'], '/course/index.php') !== false) {
+            $html .= '
+            <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // Delay to ensure Moodle\'s core AMD modules have initialized
+                setTimeout(function() {
+                    
+                    // 1. Expand all Categories
+                    const expandBtn = document.querySelector("[data-action=\'expandall\']");
+                    if (expandBtn && expandBtn.getAttribute("aria-expanded") !== "true") {
+                        expandBtn.click();
+                    } else {
+                        const elements = document.querySelectorAll("a, button, span");
+                        for (let el of elements) {
+                            if (el.textContent.trim().toLowerCase() === "expand all") {
+                                el.click();
+                                break;
+                            }
+                        }
+                    }
+
+                }, 400);
+            });
+            </script>';
+        }
         
         // Check if the user is a Site Administrator
         if (is_siteadmin()) {
@@ -455,4 +479,75 @@ class theme_academy_theme_core_renderer extends \theme_boost\output\core_rendere
         return parent::render_user_picture($userpicture);
     }
 
+}
+
+// =========================================================================
+// COURSE CATEGORY OVERRIDE - CONVERT LIST TO CARDS
+// =========================================================================
+
+// Ensure Moodle's core course renderer is loaded so we can extend it
+global $CFG;
+require_once($CFG->dirroot . '/course/renderer.php');
+
+class theme_academy_theme_core_course_renderer extends \core_course_renderer {
+    
+    // Updated signature to match core_course_renderer exactly
+    protected function coursecat_coursebox(\coursecat_helper $chelper, $course, $additionalclasses = '') {
+        global $CFG, $USER, $DB;
+        require_once($CFG->libdir . '/completionlib.php');
+
+        $context = \context_course::instance($course->id);
+        
+        // 1. Prepare the data exactly as your coursecard.mustache expects it
+        $data = new stdClass();
+        $data->id = $course->id;
+        $data->fullname = format_string($course->fullname, true, ['context' => $context]);
+        $data->viewurl = (new moodle_url('/course/view.php', ['id' => $course->id]))->out(false);
+        
+        // 2. Extract the Course Image
+        $data->courseimage = 'https://picsum.photos/600/400'; // Default fallback
+        foreach ($course->get_course_overviewfiles() as $file) {
+            if ($file->is_valid_image()) {
+                $data->courseimage = moodle_url::make_pluginfile_url(
+                    $file->get_contextid(), $file->get_component(), $file->get_filearea(), 
+                    null, $file->get_filepath(), $file->get_filename()
+                )->out(false);
+                break;
+            }
+        }
+
+        // 3. Extract the Category Name
+        $category = $DB->get_record('course_categories', ['id' => $course->category], 'name');
+        $data->coursecategory = $category ? format_string($category->name) : '';
+
+        // 4. Extract Progress and Last Accessed Data
+        $data->hasprogress = false;
+        $data->progress = 0;
+        $data->lastaccessdate = 'Not accessed yet';
+
+        if (isloggedin() && !isguestuser()) {
+            $course_record = get_course($course->id);
+            $completion = new completion_info($course_record);
+            
+            if ($completion->is_enabled()) {
+                $data->hasprogress = true;
+                $progresspercentage = \core_completion\progress::get_course_progress_percentage($course_record);
+                $data->progress = ($progresspercentage !== null) ? round($progresspercentage) : 0;
+            }
+
+            $timeaccess = $DB->get_field('user_lastaccess', 'timeaccess', ['userid' => $USER->id, 'courseid' => $course->id]);
+            if ($timeaccess) {
+                $data->lastaccessdate = 'Last activity on ' . userdate($timeaccess, '%b %d, %y');
+            }
+        }
+
+        // 5. Render your custom card template instead of the default list
+        $card_html = $this->render_from_template('core_course/coursecard', $data);
+
+        // 6. Wrap it in Moodle's native wrapper using the correct variable
+        return html_writer::div($card_html, 'coursebox academy-coursebox-override ' . $additionalclasses, [
+            'data-courseid' => $course->id,
+            'data-type' => '1'
+        ]);
+    }
 }
