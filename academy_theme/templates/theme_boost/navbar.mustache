@@ -1,0 +1,130 @@
+<nav class="navbar fixed-top navbar-light bg-white border-bottom py-2 navbar-expand-lg" aria-label="{{#str}}sitemenubar, admin{{/str}}">
+    <div class="container-fluid px-2 px-md-3">
+        
+        <a href="{{{ config.wwwroot }}}" class="navbar-brand d-flex align-items-center ms-0 ms-md-2 me-auto">
+            {{#output.get_logo_url}}
+                <img src="{{output.get_logo_url}}" alt="{{sitename}}" class="academy-logo">
+            {{/output.get_logo_url}}
+            {{^output.get_logo_url}}
+                <span class="site-name fw-bold academy-primary-text" style="font-size: 1.3rem;">{{{ sitename }}}</span>
+            {{/output.get_logo_url}}
+        </a>
+
+        <div class="d-flex align-items-center order-2 order-lg-3 ms-auto">
+            {{{ output.edit_switch }}}
+            <div class="nav-item ms-1 ms-md-2 academy-user-menu">
+                {{{ output.user_menu }}}
+            </div>
+            <button class="navbar-toggler ms-2 border-0 px-1 d-lg-none" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#academyNavCollapse" data-bs-target="#academyNavCollapse" aria-controls="academyNavCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fa fa-bars academy-primary-text" style="font-size: 1.5rem;"></i>
+            </button>
+        </div>
+
+        <div class="collapse navbar-collapse order-3 order-lg-2 mt-3 mt-lg-0" id="academyNavCollapse">
+            <ul class="navbar-nav align-items-lg-center me-auto px-3 px-lg-4 pb-3 pb-lg-0">
+                <li class="nav-item me-lg-4 mb-3 mb-lg-0 w-100" style="max-width: 400px;">
+                    <form action="{{{ config.wwwroot }}}/course/search.php" method="GET" class="simplesearchform d-flex align-items-center w-100">
+                        <div class="input-group w-100 shadow-sm shadow-lg-none">
+                            <div class="input-group-prepend">
+                                <button type="submit" class="btn input-group-text m-0 p-2" style="border: none; background: transparent; color: #A0AEC0; cursor: pointer;">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                            <input type="text" name="search" class="form-control" placeholder="{{#str}} search_courses, theme_academy_theme {{/str}}">
+                        </div>
+                    </form>
+                </li>
+
+                <li class="nav-item dropdown mb-2 mb-lg-0">
+                    <a class="nav-link dropdown-toggle fw-bold text-dark px-lg-0 py-2 py-lg-0" href="#" role="button" data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false" data-display="static" style="font-size: 0.95rem;">
+                        {{#str}} nav_learning_dev, theme_academy_theme {{/str}}
+                    </a>
+                    <ul class="dropdown-menu border-0 shadow-sm mt-2" style="border-radius: 8px; z-index: 1060 !important;">
+                        <li><a class="dropdown-item py-2" href="{{{ config.wwwroot }}}/">{{#str}} home, core {{/str}}</a></li>
+                        <li><a class="dropdown-item py-2" href="{{{ config.wwwroot }}}/my/">{{#str}} myhome, core {{/str}}</a></li>
+                        <li><a class="dropdown-item py-2" href="{{{ config.wwwroot }}}/my/courses.php">{{#str}} mycourses, core {{/str}}</a></li>
+                        <li class="academy-admin-only"><hr class="dropdown-divider"></li>
+                        <li class="academy-admin-only"><a class="dropdown-item py-2" href="{{{ config.wwwroot }}}/admin/search.php">{{#str}} siteadministration, theme_academy_theme {{/str}}</a></li>
+                        <li class="academy-admin-only"><a class="dropdown-item py-2" href="{{{ config.wwwroot }}}/admin/settings.php?section=themesettingacademy_theme">{{#str}} theme_settings, theme_academy_theme {{/str}}</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav align-items-lg-center flex-row flex-wrap ms-lg-auto px-3 px-lg-0 pb-3 pb-lg-0 gap-3 gap-lg-2">
+                <li class="nav-item dropdown d-flex align-items-center">
+                    <a class="nav-link dropdown-toggle text-dark d-flex align-items-center position-relative" href="#" role="button" data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false" data-display="static" style="padding: 0.5rem; font-size: 0.95rem; font-weight: 500;">
+                        <i class="fa fa-globe academy-primary-text" style="margin-right: 6px; font-size: 1.1rem;"></i>
+                        <span class="d-none d-xl-inline">Language</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end border-0 shadow-sm" style="border-radius: 8px; min-width: 120px; margin-top: 15px !important; z-index: 1060 !important;">
+                        <li><a class="dropdown-item d-flex align-items-center py-2" href="?lang=en">English</a></li>
+                        <li><a class="dropdown-item d-flex align-items-center py-2" href="?lang=es">Español</a></li>
+                        <li><a class="dropdown-item d-flex align-items-center py-2" href="?lang=fr">Français</a></li>
+                    </ul>
+                </li>
+
+                {{#secondarymoremenu}}
+                <li class="nav-item dropdown d-flex align-items-center academy-gear-menu">
+                    <a class="nav-link text-dark position-relative" href="#" role="button" data-toggle="dropdown" data-bs-toggle="dropdown" aria-expanded="false" data-display="static" style="padding: 0.5rem;" title="{{#str}} page_options, theme_academy_theme {{/str}}">
+                        <i class="fa fa-cog" style="font-size: 1.2rem;"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end border-0 shadow-sm academy-settings-dropdown" style="border-radius: 8px; min-width: 220px; margin-top: 15px !important; z-index: 1060 !important;">
+                        <h6 class="dropdown-header text-uppercase" style="font-size: 0.75rem; letter-spacing: 0.5px; color: #8C98A4;">{{#str}} page_options, theme_academy_theme {{/str}}</h6>
+                        {{> core/moremenu }}
+                    </div>
+                </li>
+                {{/secondarymoremenu}}
+
+                <li class="nav-item d-flex align-items-center">
+                    <a href="{{{ config.wwwroot }}}/message/index.php" data-action="toggle-message-drawer" class="nav-link text-dark position-relative" style="padding: 0.5rem;">
+                        <i class="fa fa-commenting-o" style="font-size: 1.2rem;"></i>
+                    </a>
+                </li>
+                <li class="nav-item d-flex align-items-center">
+                    <a href="{{{ config.wwwroot }}}/admin/index.php" class="nav-link text-dark position-relative" style="padding: 0.5rem;">
+                        <i class="fa fa-bell-o" style="font-size: 1.2rem;"></i>
+                        <span id="notification" class="position-absolute p-1 bg-warning border border-light rounded-circle" style="top: 6px; right: 6px;"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {{#js}}
+require(['jquery'], function($) {
+    $(document).ready(function() {
+        var gearMenu = '.academy-gear-menu';
+        var settingsDropdown = '.academy-settings-dropdown';
+        var moreButton = '[data-region="morebutton"] > a, .dropdownmoremenu > a';
+
+        $(settingsDropdown).on('click', moreButton, function(e) {
+            e.preventDefault(); 
+            e.stopPropagation(); 
+            var $parentLi = $(this).parent();
+            var $nestedMenu = $parentLi.children('.dropdown-menu');
+            if ($parentLi.hasClass('show')) {
+                $parentLi.removeClass('show');
+                $nestedMenu.removeClass('show');
+                $(this).attr('aria-expanded', 'false');
+            } else {
+                $parentLi.addClass('show');
+                $nestedMenu.addClass('show');
+                $(this).attr('aria-expanded', 'true');
+            }
+        });
+        
+        $(gearMenu).on('hidden.bs.dropdown', function () {
+            var $moreContainer = $(this).find('[data-region="morebutton"], .dropdownmoremenu');
+            var $moreLink = $moreContainer.find('> a');
+            var $moreMenu = $moreContainer.find('.dropdown-menu');
+            $moreContainer.removeClass('show');
+            $moreMenu.removeClass('show');
+            $moreLink.attr('aria-expanded', 'false');
+        });
+        
+        $(settingsDropdown).on('click', '.dropdown-menu', function(e) {
+            e.stopPropagation();
+        });
+    });
+});
+{{/js}}
+</nav>

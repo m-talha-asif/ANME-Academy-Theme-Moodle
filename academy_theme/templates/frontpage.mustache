@@ -1,0 +1,659 @@
+{{> theme_boost/head }}
+
+<body {{{ bodyattributes }}}>
+{{> core/local/toast/wrapper}}
+<div id="page-wrapper" class="d-print-block">
+
+    {{{ output.standard_top_of_body_html }}}
+    {{> theme_boost/navbar }}
+
+    {{#hasblocks}}
+        {{< theme_boost/drawer }}
+            {{$id}}theme_boost-drawers-blocks{{/id}}
+            {{$drawerclasses}}drawer drawer-right{{#blockdraweropen}} show{{/blockdraweropen}}{{/drawerclasses}}
+            {{$drawercontent}}
+                <div class="d-print-none">
+                    {{{ addblockbutton }}}
+                    {{{ sidepreblocks }}}
+                </div>
+            {{/drawercontent}}
+            {{$drawerpreferencename}}drawer-open-block{{/drawerpreferencename}}
+            {{$forceopen}}{{#forceblockdraweropen}}1{{/forceblockdraweropen}}{{/forceopen}}
+            {{$drawerstate}}show-drawer-right{{/drawerstate}}
+            {{$tooltipplacement}}left{{/tooltipplacement}}
+            {{$drawercloseonresize}}1{{/drawercloseonresize}}
+            {{$closebuttontext}}{{#str}}closeblockdrawer, core{{/str}}{{/closebuttontext}}
+        {{/ theme_boost/drawer}}
+    {{/hasblocks}}
+
+    <div id="page" data-region="mainpage" data-usertour="scroller" class="drawers {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}} drag-container academy-frontpage-layout">
+        <div id="topofscroll" class="main-inner">
+            <div class="drawer-toggles d-flex">
+                {{#hasblocks}}
+                    <div class="drawer-toggler drawer-right-toggle ms-auto d-print-none" style="margin-right: 0 !important;">
+                        <button class="btn academy-modern-drawer-btn shadow-sm" data-toggler="drawers" data-action="toggle" data-target="theme_boost-drawers-blocks" data-bs-toggle="tooltip" data-bs-placement="left" title="{{#str}}opendrawerblocks, core{{/str}}">
+                            <span class="visually-hidden">{{#str}}opendrawerblocks, core{{/str}}</span>
+                            <i class="fa fa-angle-left" style="font-weight: bold;"></i>
+                        </button>
+                    </div>
+                {{/hasblocks}}
+            </div>
+
+            <div id="page-content" class="pb-3 d-print-block">
+                
+                <div class="academy-hero-wrapper position-relative">
+                    <div class="container-fluid text-center">
+                        <h3 class="hero-title">{{#str}} hello, theme_academy_theme {{/str}} <strong style="font-weight: 700;">{{{firstname}}}</strong>.<br>{{#str}} welcome_academy, theme_academy_theme {{/str}}</h3>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-center mx-auto" style="max-width: 1500px; width: 96%;">
+                        {{#has_multiple_slides}}
+                        <button id="heroLeftBtn" class="hero-nav-arrow hero-left-btn rounded-circle me-3 me-md-4 shadow-sm d-none d-md-flex" style="transition: opacity 0.3s ease;">
+                            <i class="fa fa-chevron-left"></i>
+                        </button>
+                        {{/has_multiple_slides}}
+
+                        <div class="academy-dashboard-hero position-relative w-100 shadow-lg">
+                            <div class="hero-carousel-track">
+                                {{#hero_slides}}
+                                <div class="hero-slide">
+                                    <div class="row align-items-center h-100 m-0 p-4 p-md-5 hero-content">
+                                        <div class="{{#video_url}}col-lg-7 pe-lg-5{{/video_url}}{{^video_url}}col-lg-12{{/video_url}} text-white text-start">
+                                            <h6 class="mb-3" style="letter-spacing: 0.5px; color: #94A3B8; font-size: 0.85rem; font-style: italic;">{{{title}}}</h6>
+                                            <p class="mb-4 fw-light" style="font-size: 1.15rem; line-height: 1.7; color: #F8FAFC;">
+                                                "{{{quote}}}"
+                                            </p>
+                                            <div class="d-flex align-items-center mt-4">
+                                                {{#profile_img}}
+                                                <img src="{{{profile_img}}}" class="rounded-circle me-3 border border-2 border-secondary" style="width: 50px; height: 50px; object-fit: cover;">
+                                                {{/profile_img}}
+                                                <div class="text-start">
+                                                    <h6 class="mb-0 fw-bold" style="font-size: 0.95rem;">{{{name}}}</h6>
+                                                    <small style="color: #94A3B8; font-size: 0.8rem;">{{{role}}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{#video_url}}
+                                        <div class="col-lg-5 text-center p-0 mt-5 mt-lg-0">
+                                            <div class="video-thumbnail academy-primary-bg rounded-3 position-relative overflow-hidden shadow-sm w-100" style="height: 240px;">
+                                                <video class="position-absolute w-100 h-100 academy-hero-video" style="top: 0; left: 0; object-fit: cover; z-index: 1;" preload="auto" muted playsinline>
+                                                    <source src="{{{video_url}}}" type="video/mp4">
+                                                </video>
+                                                <div class="inline-video-overlay" style="position: relative; z-index: 2; display: block; width: 100%; height: 100%; cursor: pointer;">
+                                                    <div class="play-button position-absolute d-flex justify-content-center align-items-center shadow" style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 65px; height: 65px; background: rgba(255,255,255,0.2); border-radius: 50%; backdrop-filter: blur(5px); border: 1px solid rgba(255,255,255,0.3);">
+                                                        <i class="fa fa-play text-white ms-1" style="font-size: 1.5rem;"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{/video_url}}
+                                    </div>
+                                </div>
+                                {{/hero_slides}}
+                            </div>
+                        </div>
+
+                        {{#has_multiple_slides}}
+                        <button id="heroRightBtn" class="hero-nav-arrow hero-right-btn rounded-circle ms-3 ms-md-4 shadow-sm d-none d-md-flex" style="transition: opacity 0.3s ease;">
+                            <i class="fa fa-chevron-right"></i>
+                        </button>
+                        {{/has_multiple_slides}}
+                    </div>
+
+                    <div class="academy-help-container mx-auto">
+                        <button id="academyHelpScrollBtn" class="academy-help-btn btn rounded-circle d-flex align-items-center justify-content-center shadow-sm">
+                            <div class="inner-circle d-flex align-items-center justify-content-center">
+                                <i class="fa fa-question"></i>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="region-main-box">
+                    {{#hasregionmainsettingsmenu}}
+                    <div id="region-main-settings-menu" class="d-print-none">
+                        <div> {{{ regionmainsettingsmenu }}} </div>
+                    </div>
+                    {{/hasregionmainsettingsmenu}}
+                    
+                    <div id="region-main">
+                        {{#hasregionmainsettingsmenu}}
+                            <div class="region_main_settings_menu_proxy"></div>
+                        {{/hasregionmainsettingsmenu}}
+                        
+                        <div class="container-fluid mx-auto mt-5" style="max-width: 1500px; width: 96%;">
+                            <div class="row">
+                                
+                                <div class="col-lg-9 pe-lg-5 mb-4">
+                                   
+                                    {{#show_learning_programs}}
+                                    <div class="block-myoverview block-cards academy-custom-myoverview">
+                                        <div class="d-flex justify-content-between align-items-center mb-4 mt-2">
+                                            <div class="d-flex align-items-baseline">
+                                                <h3 class="fw-bold m-0 me-3 academy-primary-text">{{#str}} show_learning_programs, theme_academy_theme {{/str}}</h3>
+                                                <span class="text-muted fw-bold d-none d-sm-inline">{{#str}} mycourses, core {{/str}}</span>
+                                            </div>
+                                            <div class="academy-carousel-controls">
+                                                <button class="btn rounded-circle me-2 custom-carousel-btn-left"><i class="fa fa-chevron-left"></i></button>
+                                                <button class="btn rounded-circle custom-carousel-btn-right"><i class="fa fa-chevron-right"></i></button>
+                                            </div>
+                                        </div>
+
+                                        <div class="academy-course-carousel">
+                                            <div class="row flex-nowrap" id="custom-course-track" style="overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; gap: 1.5rem; padding-bottom: 2rem;">
+                                                
+                                                {{#my_courses}}
+                                                <div style="flex: 0 0 260px; width: 260px;">
+                                                    <div class="card dashboard-card academy-card p-2 m-0 w-100 h-100" data-course-id="{{id}}">
+                                                        
+                                                        <div class="d-block mb-2">
+                                                            <div class="academy-card-img" style='background-image: url("{{{courseimage}}}");'></div>
+                                                        </div>
+                                                        
+                                                        <div class="card-content d-flex flex-column h-100 p-2">
+                                                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                                                <span class="academy-meta-text">{{lessonscount}}</span>
+                                                                {{#hasprogress}}
+                                                                    {{#is_completed}}
+                                                                        <span class="academy-badge completed-badge">{{#str}} completed, theme_academy_theme {{/str}}</span>
+                                                                    {{/is_completed}}
+                                                                    {{#is_in_progress}}
+                                                                        <span class="academy-badge progress-badge">{{#str}} in_progress, theme_academy_theme {{/str}}</span>
+                                                                    {{/is_in_progress}}
+                                                                    {{^progress}}
+                                                                        <span class="academy-badge start-badge">{{#str}} start_course, theme_academy_theme {{/str}}</span>
+                                                                    {{/progress}}
+                                                                {{/hasprogress}}
+                                                                {{^hasprogress}}
+                                                                    <span class="academy-badge free-badge">{{#str}} free, theme_academy_theme {{/str}}</span>
+                                                                {{/hasprogress}}
+                                                            </div>
+                                                            
+                                                            <h5 class="card-title mb-3 mt-1"> 
+                                                                <a href="{{{viewurl}}}" class="text-decoration-none course-name stretched-link">{{fullname}}</a>
+                                                            </h5>
+                                                            
+                                                            <div class="mt-auto">
+                                                                <div class="d-flex justify-content-between align-items-end mb-2">
+                                                                    <span class="academy-meta-text">{{lastaccessdate}}</span>
+                                                                    {{#hasprogress}}
+                                                                        <span class="academy-meta-text text-dark fw-bold">{{progress}}{{#str}} percent_complete, theme_academy_theme {{/str}}</span>
+                                                                    {{/hasprogress}}
+                                                                </div>
+                                                                {{#hasprogress}}
+                                                                <div class="progress academy-progress">
+                                                                    <div class="progress-bar" role="progressbar" style="width: {{progress}}%;" aria-valuenow="{{progress}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                                </div>
+                                                                {{/hasprogress}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                {{/my_courses}}
+
+                                                {{^my_courses}}
+                                                <div class="col-12 w-100">
+                                                    <div class="alert alert-info border-0 shadow-sm" style="background-color: #F8FAFC; color: #4A5568;">
+                                                        <i class="fa fa-info-circle me-2 academy-primary-text"></i> {{#str}} no_learning_programs, theme_academy_theme {{/str}}
+                                                    </div>
+                                                </div>
+                                                {{/my_courses}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/show_learning_programs}}
+
+                                    {{#show_news_events}}
+                                    <div class="news-events-section mb-5">
+                                        <div class="d-flex justify-content-between align-items-center mb-4 section-header">
+                                            <h3 class="m-0">{{#str}} show_news_events, theme_academy_theme {{/str}}</h3>
+                                            <a href="{{{ config.wwwroot }}}/theme/academy_theme/news_list.php" target="_blank" class="text-decoration-none view-all-link">{{#str}} viewall, theme_academy_theme {{/str}}</a>
+                                        </div>
+                                        <div class="row">
+                                            {{#news_events}}
+                                            <div class="col-md-6 mb-4">
+                                                <div class="news-card">
+                                                    <div class="news-img-wrapper" style="width: 140px; height: 90px; flex-shrink: 0; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 6px rgba(0,0,0,0.06); border: 1px solid #E2E8F0; background-image: url('{{{image_url}}}'); background-size: {{bg_size}}; background-position: center; background-repeat: no-repeat; background-color: #F3F4F6;"></div>
+                                                    <div class="news-content">
+                                                        <h6 class="news-title">{{title}}</h6>
+                                                        <a href="{{url}}" target="_blank" class="news-link">{{link_text}}</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{/news_events}}
+                                            
+                                            {{^news_events}}
+                                            <div class="col-12">
+                                                <div class="alert alert-light border-0 shadow-sm text-muted text-center">
+                                                    {{#str}} no_news, theme_academy_theme {{/str}}
+                                                </div>
+                                            </div>
+                                            {{/news_events}}
+                                        </div>
+                                    </div>
+                                    {{/show_news_events}}
+                                    
+                                    {{#show_employee_spotlight}}
+                                    <div class="block_spotlight academy-custom-spotlight mt-5 mb-5">
+                                        <div class="spotlight-container p-4 academy-primary-bg" style="border-radius: 12px;">
+                                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                                <div class="d-flex align-items-center text-white">
+                                                    <div class="spotlight-icon me-3">
+                                                        <svg width="45" height="45" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M42 12 L48 6 M48 18 L55 12" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round"/>
+                                                            <path d="M32 16 L36 26 L48 26 L38 33 L42 45 L32 37 L22 45 L26 33 L16 26 L28 26 Z" fill="#FCD34D" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+                                                            <rect x="23" y="45" width="18" height="5" fill="#FCA5A5" stroke="#000000" stroke-width="2.5"/>
+                                                            <path d="M21 50 L43 50 L45 58 L19 58 Z" fill="#F9A8D4" stroke="#000000" stroke-width="2.5" stroke-linejoin="round"/>
+                                                        </svg>
+                                                    </div>
+                                                    <div>
+                                                        <h3 class="m-0 fw-bold mb-1" style="font-size: 1.35rem;">{{#str}} show_employee_spotlight, theme_academy_theme {{/str}}</h3>
+                                                        <p class="m-0" style="font-size: 0.85rem; color: #CBD5E1;">{{#str}} spotlight_subtitle, theme_academy_theme {{/str}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="spotlight-controls d-flex gap-2">
+                                                    <button class="btn bg-white rounded-circle d-flex align-items-center justify-content-center spotlight-left-btn shadow-sm" style="width: 32px; height: 32px; border: none; padding: 0;"><i class="fa fa-angle-left" style="font-size: 1.1rem; margin-right: 2px;"></i></button>
+                                                    <button class="btn bg-white rounded-circle d-flex align-items-center justify-content-center spotlight-right-btn shadow-sm" style="width: 32px; height: 32px; border: none; padding: 0;"><i class="fa fa-angle-right" style="font-size: 1.1rem; margin-left: 2px;"></i></button>
+                                                </div>
+                                            </div>
+
+                                            <div class="spotlight-carousel overflow-hidden">
+                                                <div class="d-flex spotlight-track align-items-stretch" style="overflow-x: auto; scroll-behavior: smooth; scrollbar-width: none; -ms-overflow-style: none; gap: 1rem;">
+                                                    {{#employee_spotlights}}
+                                                    <div class="card border-0 flex-shrink-0 d-flex flex-column" style="flex: 0 0 calc(25% - 0.75rem); min-width: 180px; border-radius: 12px; background-color: #ffffff;">
+                                                        <div class="p-2 pb-0">
+                                                            <img src="{{{image_url}}}" class="w-100" style="border-radius: 8px; height: 130px; object-fit: cover;" alt="{{name}}">
+                                                        </div>
+                                                        <div class="card-body p-3 pt-3 d-flex flex-column flex-grow-1">
+                                                            {{#quote}}
+                                                            <div class="mb-2">
+                                                                <div class="spotlight-quote-text fw-bold" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 0.85rem; color: #111827; line-height: 1.4em; max-height: 2.8em;">"{{{quote}}}"</div>
+                                                            </div>
+                                                            {{/quote}}
+                                                            <div class="mb-4 mt-0">
+                                                                <div class="spotlight-desc-text" style="display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; font-size: 0.75rem; line-height: 1.6em; color: #4B5563; max-height: 6.4em;">{{{description}}}</div>
+                                                            </div>
+                                                            <div class="mt-auto">
+                                                                <h6 class="fw-bold mb-0" style="font-size: 0.8rem; color: #111827;">{{{name}}}</h6>
+                                                                <small style="font-size: 0.7rem; color: #9CA3AF;">{{{role}}}</small>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    {{/employee_spotlights}}
+                                                    {{^employee_spotlights}}
+                                                    <div class="col-12 w-100">
+                                                        <div class="alert border-0 text-center text-white" style="background-color: rgba(255,255,255,0.1);">
+                                                            {{#str}} no_spotlights, theme_academy_theme {{/str}}
+                                                        </div>
+                                                    </div>
+                                                    {{/employee_spotlights}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/show_employee_spotlight}}
+
+                                    {{#show_shoutouts}}
+                                    <div class="shoutouts-section mt-5 mb-5 text-center">
+                                        <h3 class="fw-bold mb-1" style="color: #1A202C;">{{#str}} show_shoutouts, theme_academy_theme {{/str}}</h3>
+                                        <p class="text-muted mb-5" style="font-size: 0.95rem;">{{#str}} shoutouts_subtitle, theme_academy_theme {{/str}}</p>
+                                        <div class="row justify-content-center">
+                                            {{#shoutouts}}
+                                            <div class="col-md-4 mb-4">
+                                                <div class="shoutout-card px-3">
+                                                    <img src="{{{image_url}}}" class="rounded-circle mb-3 shadow-sm" style="width: 70px; height: 70px; object-fit: cover;" alt="{{name}}">
+                                                    <h6 class="fw-bold mb-1" style="color: #1A202C;">{{name}}</h6>
+                                                    <small class="d-block text-muted mb-3" style="font-size: 0.8rem;">{{role}}</small>
+                                                    <div class="mb-3">
+                                                        <div class="shoutout-message-text" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; font-size: 0.9rem; color: #4B5563; line-height: 1.5em; max-height: 4.5em;">{{message}}</div>
+                                                    </div>
+                                                    <span class="fw-bold" style="font-size: 0.85rem; color: #4B5563;">{{tags}}</span>
+                                                </div>
+                                            </div>
+                                            {{/shoutouts}}
+                                            {{^shoutouts}}
+                                            <div class="col-12">
+                                                <div class="alert alert-light border-0 shadow-sm text-muted">{{#str}} no_shoutouts, theme_academy_theme {{/str}}</div>
+                                            </div>
+                                            {{/shoutouts}}
+                                        </div>
+                                    </div>
+                                    {{/show_shoutouts}}
+
+                                    {{{ output.main_content }}}
+                                    {{{ output.activity_navigation }}}
+                                    {{{ output.course_content_footer }}}
+                                </div>
+                                
+                                <div class="col-lg-3 mt-2 mt-lg-0">
+                                    {{#show_quick_links}}
+                                    <div class="quick-links-block mb-4">
+                                        <h4>{{#str}} show_quick_links, theme_academy_theme {{/str}}</h4>
+                                        {{#ql1_url}}
+                                        <a href="{{{ql1_url}}}" class="q-link-item" target="_blank" rel="noopener noreferrer">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fa fa-bullhorn icon-left"></i>
+                                                <span>{{#str}} quicklink_news, theme_academy_theme {{/str}}</span>
+                                            </div>
+                                            <i class="fa fa-arrow-right icon-right"></i>
+                                        </a>
+                                        {{/ql1_url}}
+                                        {{#ql2_url}}
+                                        <a href="{{{ql2_url}}}" class="q-link-item" target="_blank" rel="noopener noreferrer">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fa fa-briefcase icon-left"></i>
+                                                <span>{{#str}} quicklink_workspace, theme_academy_theme {{/str}}</span>
+                                            </div>
+                                            <i class="fa fa-arrow-right icon-right"></i>
+                                        </a>
+                                        {{/ql2_url}}
+                                        {{#ql3_url}}
+                                        <a href="{{{ql3_url}}}" class="q-link-item" target="_blank" rel="noopener noreferrer">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fa fa-users icon-left"></i>
+                                                <span>{{#str}} quicklink_directory, theme_academy_theme {{/str}}</span>
+                                            </div>
+                                            <i class="fa fa-arrow-right icon-right"></i>
+                                        </a>
+                                        {{/ql3_url}}
+                                        {{#ql4_url}}
+                                        <a href="{{{ql4_url}}}" class="q-link-item" target="_blank" rel="noopener noreferrer">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fa fa-at icon-left"></i>
+                                                <span>{{#str}} quicklink_social, theme_academy_theme {{/str}}</span>
+                                            </div>
+                                            <i class="fa fa-arrow-right icon-right"></i>
+                                        </a>
+                                        {{/ql4_url}}
+                                        {{#ql5_url}}
+                                        <a href="{{{ql5_url}}}" class="q-link-item" target="_blank" rel="noopener noreferrer">
+                                            <div class="d-flex align-items-center">
+                                                <i class="fa fa-book icon-left"></i>
+                                                <span>{{#str}} quicklink_handbook, theme_academy_theme {{/str}}</span>
+                                            </div>
+                                            <i class="fa fa-arrow-right icon-right"></i>
+                                        </a>
+                                        {{/ql5_url}}
+                                    </div>
+                                    {{/show_quick_links}}
+                                    
+                                    {{#show_birthdays}}
+                                    <div class="birthdays-anniversaries-block mb-4">
+                                        <h4 class="mb-4">{{#str}} show_birthdays, theme_academy_theme {{/str}}</h4>
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <span class="text-muted fw-bold" style="font-size: 0.85rem;">{{current_date_display}}</span>
+                                            <div class="ba-nav-arrows">
+                                                <button class="btn btn-link p-0 text-muted me-2 ba-prev-btn"><i class="fa fa-angle-left"></i></button>
+                                                <button class="btn btn-link p-0 text-muted ba-next-btn"><i class="fa fa-angle-right"></i></button>
+                                            </div>
+                                        </div>
+                                        {{#upcoming_events}}
+                                        <div class="ba-event-card {{bg_class}} mb-3">
+                                            <div class="ba-date text-center me-3">
+                                                <span class="day-name d-block">{{day_name}}</span>
+                                                <span class="month-year d-block">{{month_year}}</span>
+                                            </div>
+                                            <div class="ba-details">
+                                                <div class="d-flex align-items-center mb-1">
+                                                    <span class="time">{{time_text}}</span>
+                                                    <i class="fa {{icon_class}} ms-2 text-muted" style="font-size: 0.8rem;"></i>
+                                                </div>
+                                                <span class="event-name">{{event_name}}</span>
+                                            </div>
+                                        </div>
+                                        {{/upcoming_events}}
+                                        {{^upcoming_events}}
+                                        <div class="alert alert-light border-0 shadow-sm text-center">
+                                            <span class="text-muted small">{{#str}} no_birthdays, theme_academy_theme {{/str}}</span>
+                                        </div>
+                                        {{/upcoming_events}}
+                                        <a href="{{{ config.wwwroot }}}/calendar/export.php" target="_blank" class="btn w-100 ba-subscribe-btn d-flex justify-content-between align-items-center mt-4 text-decoration-none">
+                                            <span><i class="fa fa-calendar-o me-2"></i> {{#str}} subscribe_calendar, theme_academy_theme {{/str}}</span>
+                                            <i class="fa fa-external-link"></i>
+                                        </a>
+                                    </div>
+                                    {{/show_birthdays}}
+
+                                    {{#show_new_hires}}
+                                    <div class="new-hires-block bg-white border rounded p-4 mb-4 shadow-sm" style="border-radius: 12px !important; border-color: #E2E8F0 !important;">
+                                        <div class="d-flex justify-content-between align-items-center mb-4">
+                                            <h4 class="fw-bold m-0" style="color: #1A202C; font-size: 1.1rem;">{{#str}} show_new_hires, theme_academy_theme {{/str}}</h4>
+                                            {{#has_multiple_new_hires}}
+                                            <div class="nh-nav-arrows">
+                                                <button class="btn btn-link p-0 text-muted me-2 nh-prev-btn"><i class="fa fa-angle-left"></i></button>
+                                                <button class="btn btn-link p-0 text-muted nh-next-btn"><i class="fa fa-angle-right"></i></button>
+                                            </div>
+                                            {{/has_multiple_new_hires}}
+                                        </div>
+                                        <div class="d-flex flex-column gap-4 mt-2">
+                                            {{#new_hires}}
+                                            <div class="nh-item-card w-100">
+                                                <div class="d-flex align-items-center justify-content-between">
+                                                    <div class="d-flex align-items-center">
+                                                        <img src="{{{profile_image}}}" class="rounded-circle me-3" style="width: 45px; height: 45px; object-fit: cover;" alt="{{name}}">
+                                                        <div>
+                                                            <h6 class="mb-0 fw-bold" style="font-size: 0.9rem; color: #1A202C;">{{name}}</h6>
+                                                            <small class="text-muted" style="font-size: 0.8rem;">{{role}}</small>
+                                                        </div>
+                                                    </div>
+                                                    <a href="{{{message_url}}}" class="text-decoration-none" title="Message {{name}}" target="_blank">
+                                                        <i class="fa fa-comment-o academy-accent-text" style="font-size: 1.25rem;"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            {{/new_hires}}
+                                            {{^new_hires}}
+                                            <div class="alert alert-light border-0 shadow-sm text-center text-muted p-3">
+                                                {{#str}} no_new_hires, theme_academy_theme {{/str}}
+                                            </div>
+                                            {{/new_hires}}
+                                        </div>
+                                    </div>
+                                    {{/show_new_hires}}
+
+                                    {{#show_top_performer}}
+                                    <div class="activity-block bg-white border rounded p-4 mb-4 shadow-sm" style="border-radius: 12px !important; border-color: #E2E8F0 !important;">
+                                        <div class="d-flex justify-content-between align-items-center mb-4">
+                                            <h4 class="fw-bold m-0" style="color: #1A202C; font-size: 1.1rem;">{{#str}} show_top_performer, theme_academy_theme {{/str}}</h4>
+                                            <a href="{{{ config.wwwroot }}}/theme/academy_theme/leaderboard.php" class="text-decoration-none fw-bold academy-accent-text" style="font-size: 0.9rem;">{{#str}} viewall, theme_academy_theme {{/str}}</a>
+                                        </div>
+
+                                        {{#grade_leaderboard}}
+                                        <div class="border rounded p-3 mb-3" style="border-color: #E2E8F0 !important; border-radius: 10px !important; position: relative; overflow: hidden;">
+                                            <div style="position: absolute; right: -10px; top: -15px; font-size: 4rem; font-weight: 900; color: rgba(0,0,0,0.03); z-index: 0; user-select: none;">#{{rank}}</div>
+                                            <div class="d-flex align-items-center mb-3" style="position: relative; z-index: 1;">
+                                                <div class="fw-bold me-3" style="font-size: 1.2rem; color: {{text_color}};">#{{rank}}</div>
+                                                <img src="{{{profile_img}}}" class="rounded-circle me-3 border shadow-sm" style="width: 42px; height: 42px; object-fit: cover; border-color: {{icon_bg}} !important;" alt="{{firstname}}">
+                                                <div>
+                                                    <div style="font-size: 0.95rem; color: #1A202C;"><strong class="academy-accent-text">{{firstname}}</strong></div>
+                                                    <div style="font-size: 0.85rem; color: #4B5563; font-weight: 600;">{{#str}} overall_average, theme_academy_theme {{/str}} {{average_grade}}%</div>
+                                                </div>
+                                            </div>
+                                            <div class="rounded p-2 px-3 d-flex align-items-center" style="background-color: {{bg_color}}; border: 1px solid #E0E7FF; position: relative; z-index: 1;">
+                                                <div class="rounded-circle d-flex justify-content-center align-items-center me-3 shadow-sm" style="background-color: {{icon_bg}}; width: 35px; height: 35px; min-width: 35px;">
+                                                    <i class="fa {{icon}} text-dark fs-6"></i>
+                                                </div>
+                                                <div style="line-height: 1.3;">
+                                                    <div style="font-size: 0.85rem; color: #4B5563;">
+                                                        <strong class="text-dark">{{#str}} latest, theme_academy_theme {{/str}}</strong> {{#str}} scored, theme_academy_theme {{/str}} {{recent_score}} {{#str}} on, theme_academy_theme {{/str}} <br>
+                                                        <em style="color: #1A202C;">{{recent_action}}</em>
+                                                    </div>
+                                                    <small class="text-muted" style="font-size: 0.75rem;"><i class="fa fa-clock-o me-1"></i>{{time_ago}}</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{/grade_leaderboard}}
+
+                                        {{^grade_leaderboard}}
+                                        <div class="alert alert-light border-0 shadow-sm text-center text-muted p-3">
+                                            {{#str}} no_grades, theme_academy_theme {{/str}}
+                                        </div>
+                                        {{/grade_leaderboard}}
+                                    </div>
+                                    {{/show_top_performer}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{> theme_boost/footer }}
+    </div>
+    {{{ output.standard_after_main_region_html }}}
+</div>
+</body>
+</html>
+{{#js}}
+M.util.js_pending('theme_boost/loader');
+require(['theme_boost/loader', 'theme_boost/drawer', 'jquery'], function(Loader, Drawer, $) {
+    Drawer.init();
+    M.util.js_complete('theme_boost/loader');
+    
+    $(document).ready(function() {
+        var fullName = $('.usermenu .usertext').text().trim();
+        if (fullName) {
+            var firstName = fullName.split(' ')[0];
+            $('#academy-user-greeting').text(firstName);
+        } else {
+            $('#academy-user-greeting').text('{{#str}} visitor, theme_academy_theme {{/str}}');
+        }
+    });
+
+    $(document).ready(function() {
+        var track = $('.hero-carousel-track')[0]; 
+        var leftBtn = $('#heroLeftBtn');
+        var rightBtn = $('#heroRightBtn');
+
+        function updateArrows() {
+            if (!track) return;
+            if (track.scrollLeft <= 5) {
+                leftBtn.css({'opacity': '0', 'pointer-events': 'none'});
+            } else {
+                leftBtn.css({'opacity': '1', 'pointer-events': 'auto'});
+            }
+            if (track.scrollLeft + track.clientWidth >= track.scrollWidth - 5) {
+                rightBtn.css({'opacity': '0', 'pointer-events': 'none'});
+            } else {
+                rightBtn.css({'opacity': '1', 'pointer-events': 'auto'});
+            }
+        }
+
+        if(track) {
+            updateArrows();
+            $(track).on('scroll', function() { updateArrows(); });
+            leftBtn.click(function(e) { e.preventDefault(); track.scrollBy({ left: -track.clientWidth, behavior: 'smooth' }); });
+            rightBtn.click(function(e) { e.preventDefault(); track.scrollBy({ left: track.clientWidth, behavior: 'smooth' }); });
+        }
+        
+        $('.inline-video-overlay').click(function(e) {
+            e.preventDefault();
+            var $overlay = $(this);
+            var video = $overlay.siblings('.academy-hero-video')[0];
+            $overlay.fadeOut(300);
+            video.controls = true;
+            video.muted = false; 
+            video.play();
+            $(video).off('ended').on('ended', function() {
+                video.controls = false;
+                video.currentTime = 0; 
+                $overlay.fadeIn(300);
+            });
+        });
+
+        var courseTrack = document.getElementById('custom-course-track');
+        if (courseTrack) {
+            $('.custom-carousel-btn-left').click(function(e) { e.preventDefault(); courseTrack.scrollBy({ left: -280, behavior: 'smooth' }); });
+            $('.custom-carousel-btn-right').click(function(e) { e.preventDefault(); courseTrack.scrollBy({ left: 280, behavior: 'smooth' }); });
+        }
+
+        $('.course-name').on('mouseenter', function() {
+            var $this = $(this);
+            if (this.scrollWidth > this.clientWidth) {
+                $this.css('text-overflow', 'clip');
+                var scrollDistance = this.scrollWidth - this.clientWidth;
+                var duration = scrollDistance * 20; 
+                $this.stop(true, true).delay(200).animate({ scrollLeft: scrollDistance }, duration, 'linear');
+            }
+        }).on('mouseleave', function() {
+            var $this = $(this);
+            $this.stop(true, true).animate({ scrollLeft: 0 }, 300, 'swing', function() {
+                $this.css('text-overflow', 'ellipsis');
+            });
+        });
+
+        var spotlightTrack = $('.spotlight-track')[0];
+        if (spotlightTrack) {
+            $('.spotlight-left-btn').click(function(e) { e.preventDefault(); var scrollAmount = $(spotlightTrack).find('.card').outerWidth(true); spotlightTrack.scrollBy({ left: -scrollAmount, behavior: 'smooth' }); });
+            $('.spotlight-right-btn').click(function(e) { e.preventDefault(); var scrollAmount = $(spotlightTrack).find('.card').outerWidth(true); spotlightTrack.scrollBy({ left: scrollAmount, behavior: 'smooth' }); });
+        }
+
+        function initTextToggle(textSelector, clampCount, collapsedHeight) {
+            $(textSelector).each(function() {
+                if (this.scrollHeight > this.clientHeight) {
+                    $(this).css('cursor', 'pointer');
+                    $(this).attr('title', '{{#str}} click_to_expand, theme_academy_theme {{/str}}');
+                    $(this).click(function(e) {
+                        e.preventDefault();
+                        if ($(this).css('-webkit-line-clamp') === clampCount) {
+                            $(this).css({ '-webkit-line-clamp': 'unset', 'max-height': 'none' });
+                            $(this).attr('title', '{{#str}} click_to_collapse, theme_academy_theme {{/str}}');
+                        } else {
+                            $(this).css({ '-webkit-line-clamp': clampCount, 'max-height': collapsedHeight });
+                            $(this).attr('title', '{{#str}} click_to_expand, theme_academy_theme {{/str}}');
+                        }
+                    });
+                }
+            });
+        }
+        initTextToggle('.spotlight-quote-text', '2', '2.8em');
+        initTextToggle('.spotlight-desc-text', '4', '6.4em');
+        initTextToggle('.shoutout-message-text', '3', '4.5em');
+
+        var $baEvents = $('.ba-event-card');
+        var totalBAEvents = $baEvents.length;
+        var itemsPerPage = 2;
+        var currentBAIndex = 0;
+        function updateBAView() {
+            $baEvents.hide();
+            for (var i = 0; i < itemsPerPage; i++) {
+                var targetIndex = currentBAIndex + i;
+                if (targetIndex < totalBAEvents) { $baEvents.eq(targetIndex).fadeIn(200); }
+            }
+            if (currentBAIndex === 0) { $('.ba-prev-btn').css({'opacity': '0.3', 'pointer-events': 'none'});
+            } else { $('.ba-prev-btn').css({'opacity': '1', 'pointer-events': 'auto'}); }
+            if (currentBAIndex + itemsPerPage >= totalBAEvents) { $('.ba-next-btn').css({'opacity': '0.3', 'pointer-events': 'none'});
+            } else { $('.ba-next-btn').css({'opacity': '1', 'pointer-events': 'auto'}); }
+        }
+        if (totalBAEvents > 0) { updateBAView();
+        }
+        $('.ba-next-btn').click(function(e) { e.preventDefault(); if (currentBAIndex + itemsPerPage < totalBAEvents) { currentBAIndex += itemsPerPage; updateBAView(); } });
+        $('.ba-prev-btn').click(function(e) { e.preventDefault(); if (currentBAIndex - itemsPerPage >= 0) { currentBAIndex -= itemsPerPage; updateBAView(); } });
+        
+        var $nhEvents = $('.nh-item-card');
+        var totalNHEvents = $nhEvents.length;
+        var nhItemsPerPage = 2;
+        var currentNHIndex = 0;
+        function updateNHView() {
+            $nhEvents.hide();
+            for (var i = 0; i < nhItemsPerPage; i++) {
+                var targetIndex = currentNHIndex + i;
+                if (targetIndex < totalNHEvents) { $nhEvents.eq(targetIndex).fadeIn(200); }
+            }
+            if (currentNHIndex === 0) { $('.nh-prev-btn').css({'opacity': '0.3', 'pointer-events': 'none'});
+            } else { $('.nh-prev-btn').css({'opacity': '1', 'pointer-events': 'auto'}); }
+            if (currentNHIndex + nhItemsPerPage >= totalNHEvents) { $('.nh-next-btn').css({'opacity': '0.3', 'pointer-events': 'none'});
+            } else { $('.nh-next-btn').css({'opacity': '1', 'pointer-events': 'auto'}); }
+        }
+        if (totalNHEvents > 0) { updateNHView();
+        }
+        $('.nh-next-btn').click(function(e) { e.preventDefault(); if (currentNHIndex + nhItemsPerPage < totalNHEvents) { currentNHIndex += nhItemsPerPage; updateNHView(); } });
+        $('.nh-prev-btn').click(function(e) { e.preventDefault(); if (currentNHIndex - nhItemsPerPage >= 0) { currentNHIndex -= nhItemsPerPage; updateNHView(); } });
+        $('#academyHelpScrollBtn').click(function(e) {
+            e.preventDefault();
+            var targetPosition = $("#page-footer").length ? $("#page-footer").offset().top : $(document).height();
+            $('html, body').animate({ scrollTop: targetPosition }, 600, 'swing'); 
+        });
+    });
+});
+{{/js}}

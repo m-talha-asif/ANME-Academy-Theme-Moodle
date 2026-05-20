@@ -1,0 +1,76 @@
+<div
+  class="card dashboard-card academy-card p-3"
+  data-region="course-content"
+  data-course-id="{{ id }}"
+>
+  <a href="{{{viewurl}}}" tabindex="-1" class="d-block mb-3">
+    <div
+      class="academy-card-img"
+      style="background-image: url(&quot;{{{courseimage}}}&quot;);"
+    ></div>
+  </a>
+
+  <div class="card-content d-flex flex-column h-100">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <span
+        class="text-muted"
+        style="font-size: 0.75rem; color: #8c98a4 !important"
+      >
+        {{#coursecategory}}{{ coursecategory }}{{/coursecategory}}
+        {{^coursecategory}}8 {{#str}} lessons, theme_academy_theme {{/str
+        }}{{/coursecategory}}
+      </span>
+
+      {{#hasprogress}}
+      {{#progress}}
+      <span class="academy-badge progress-badge"
+        >{{#str}} in_progress, theme_academy_theme {{/str}}</span
+      >
+      {{/progress}}
+      {{^progress}}
+      <span class="academy-badge start-badge"
+        >{{#str}} start_course, theme_academy_theme {{/str}}</span
+      >
+      {{/progress}}
+      {{/hasprogress}}
+      {{^hasprogress}}
+      <span class="academy-badge free-badge"
+        >{{#str}} free, theme_academy_theme {{/str}}</span
+      >
+      {{/hasprogress}}
+    </div>
+
+    <h5 class="card-title mb-3 mt-1">
+      <a href="{{{viewurl}}}" class="text-decoration-none course-name">{{
+        fullname
+      }}</a>
+    </h5>
+
+    <div class="mt-auto">
+      <div class="d-flex justify-content-between align-items-end mb-2">
+        <span class="text-muted" style="font-size: 0.65rem">{{
+          lastaccessdate
+        }}</span>
+        {{#hasprogress}}
+        <span class="fw-bold academy-primary-text" style="font-size: 0.75rem"
+          >{{ progress }}{{#str}} percent_complete, theme_academy_theme
+          {{/str}}</span
+        >
+        {{/hasprogress}}
+      </div>
+
+      {{#hasprogress}}
+      <div class="progress academy-progress">
+        <div
+          class="progress-bar academy-primary-bg"
+          role="progressbar"
+          style="width: {{ progress }}%;"
+          aria-valuenow="{{ progress }}"
+          aria-valuemin="0"
+          aria-valuemax="100"
+        ></div>
+      </div>
+      {{/hasprogress}}
+    </div>
+  </div>
+</div>

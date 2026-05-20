@@ -1,0 +1,86 @@
+<footer id="page-footer" class="academy-footer py-5">
+    <div class="container-fluid px-4 px-md-5" style="max-width: 1300px; margin: 0 auto;">
+        
+        <div id="course-footer">{{{ output.course_footer }}}</div>
+
+        <div class="row mb-4 mt-2">
+            <div class="col-lg-3 col-md-12 mb-4 mb-lg-0 text-center text-lg-start d-flex align-items-center justify-content-center justify-content-lg-start">
+                {{#output.get_logo_url}}
+                    <img src="{{output.get_logo_url}}" alt="{{sitename}}" class="footer-logo">
+                {{/output.get_logo_url}}
+                {{^output.get_logo_url}}
+                    <span class="site-name fw-bold" style="color: #F9FAFB; font-size: 1.5rem;">{{{ sitename }}}</span>
+                {{/output.get_logo_url}}
+            </div>
+
+            {{#footer_col1_title}}
+            <div class="col-lg-2 col-md-3 col-sm-6 mb-4 mb-lg-0">
+                <h5 class="footer-heading">{{{ footer_col1_title }}}</h5>
+                <ul class="list-unstyled footer-links">
+                    {{{ footer_col1_links }}}
+                </ul>
+            </div>
+            {{/footer_col1_title}}
+
+            {{#footer_col2_title}}
+            <div class="col-lg-2 col-md-3 col-sm-6 mb-4 mb-lg-0">
+                <h5 class="footer-heading">{{{ footer_col2_title }}}</h5>
+                <ul class="list-unstyled footer-links">
+                    {{{ footer_col2_links }}}
+                </ul>
+            </div>
+            {{/footer_col2_title}}
+
+            {{#footer_hr_title}}
+            <div class="col-lg-3 col-md-6 mb-4 mb-lg-0 px-lg-4">
+                <h5 class="footer-heading">{{{ footer_hr_title }}}</h5>
+                <ul class="list-unstyled footer-contact">
+                    {{#footer_phone}}
+                    <li><i class="fa fa-phone" aria-hidden="true"></i> <span>{{{ footer_phone }}}</span></li>
+                    {{/footer_phone}}
+                    {{#footer_email}}
+                    <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:{{{ footer_email }}}">{{{ footer_email }}}</a></li>
+                    {{/footer_email}}
+                    {{#footer_website}}
+                    <li><i class="fa fa-globe" aria-hidden="true"></i> <a href="https://{{{ footer_website }}}" target="_blank" rel="noopener noreferrer">{{{ footer_website }}}</a></li>
+                    {{/footer_website}}
+                    {{#footer_address}}
+                    <li><i class="fa fa-map-marker" aria-hidden="true"></i> <span>{{{ footer_address }}}</span></li>
+                    {{/footer_address}}
+                </ul>
+            </div>
+            {{/footer_hr_title}}
+
+            {{#footer_social_title}}
+            <div class="col-lg-2 col-md-12 mt-4 mt-lg-0">
+                <h5 class="footer-heading">{{{ footer_social_title }}}</h5>
+                <ul class="list-unstyled footer-social">
+                    {{#footer_youtube}}
+                    <li><a href="{{{ footer_youtube }}}" target="_blank" rel="noopener noreferrer"><i class="fa fa-youtube-play"></i> YouTube</a></li>
+                    {{/footer_youtube}}
+                    {{#footer_instagram}}
+                    <li><a href="{{{ footer_instagram }}}" target="_blank" rel="noopener noreferrer"><i class="fa fa-instagram"></i> Instagram</a></li>
+                    {{/footer_instagram}}
+                    {{#footer_facebook}}
+                    <li><a href="{{{ footer_facebook }}}" target="_blank" rel="noopener noreferrer"><i class="fa fa-facebook"></i> Facebook</a></li>
+                    {{/footer_facebook}}
+                    {{#footer_linkedin}}
+                    <li><a href="{{{ footer_linkedin }}}" target="_blank" rel="noopener noreferrer"><i class="fa fa-linkedin"></i> LinkedIn</a></li>
+                    {{/footer_linkedin}}
+                </ul>
+            </div>
+            {{/footer_social_title}}
+        </div>
+
+        {{#footer_copyright}}
+        <div class="footer-bottom text-center pt-4 pb-2">
+            <p class="mb-0">{{{ footer_copyright }}}</p>
+        </div>
+        {{/footer_copyright}}
+        
+        <div class="moodle-standard-footer-html mt-3 text-center">
+            {{{ output.standard_footer_html }}}
+            {{{ output.standard_end_of_body_html }}}
+        </div>
+    </div>
+</footer>

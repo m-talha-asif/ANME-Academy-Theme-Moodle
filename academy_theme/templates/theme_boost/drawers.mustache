@@ -1,0 +1,502 @@
+{{> theme_boost/head }}
+
+<body {{{ bodyattributes }}}>
+{{> core/local/toast/wrapper}}
+<div id="page-wrapper" class="d-print-block">
+
+    {{{ output.standard_top_of_body_html }}}
+
+    {{> theme_boost/navbar }}
+
+    {{#courseindex}}
+        {{< theme_boost/drawer }}
+            {{$id}}theme_boost-drawers-courseindex{{/id}}
+            {{$drawerheadercontent}}
+                {{> theme_boost/courseindexdrawercontrols}}
+            {{/drawerheadercontent}}
+            {{$drawerclasses}}drawer drawer-left {{#courseindexopen}}show{{/courseindexopen}}{{/drawerclasses}}
+            {{$drawercontent}}
+                {{{courseindex}}}
+            {{/drawercontent}}
+            {{$drawerpreferencename}}drawer-open-index{{/drawerpreferencename}}
+            {{$drawerstate}}show-drawer-left{{/drawerstate}}
+            {{$tooltipplacement}}right{{/tooltipplacement}}
+            {{$closebuttontext}}{{#str}}closecourseindex, core{{/str}}{{/closebuttontext}}
+        {{/ theme_boost/drawer}}
+    {{/courseindex}}
+    
+    {{#hasblocks}}
+        {{< theme_boost/drawer }}
+            {{$id}}theme_boost-drawers-blocks{{/id}}
+            {{$drawerclasses}}drawer drawer-right{{#blockdraweropen}} show{{/blockdraweropen}}{{/drawerclasses}}
+            {{$drawercontent}}
+                <div class="d-print-none">
+                    {{{ addblockbutton }}}
+                    {{{ sidepreblocks }}}
+                </div>
+            {{/drawercontent}}
+            {{$drawerpreferencename}}drawer-open-block{{/drawerpreferencename}}
+            {{$forceopen}}{{#forceblockdraweropen}}1{{/forceblockdraweropen}}{{/forceopen}}
+            {{$drawerstate}}show-drawer-right{{/drawerstate}}
+            {{$tooltipplacement}}left{{/tooltipplacement}}
+            {{$drawercloseonresize}}1{{/drawercloseonresize}}
+            {{$closebuttontext}}{{#str}}closeblockdrawer, core{{/str}}{{/closebuttontext}}
+        {{/ theme_boost/drawer}}
+    {{/hasblocks}}
+
+    <div id="page" data-region="mainpage" data-usertour="scroller" class="drawers {{#courseindexopen}}show-drawer-left{{/courseindexopen}} {{#blockdraweropen}}show-drawer-right{{/blockdraweropen}} drag-container {{#is_custom_course_page}}academy-course-layout{{/is_custom_course_page}}">
+        <div id="topofscroll" class="main-inner">
+            <div class="drawer-toggles d-flex">
+                {{#courseindex}}
+                    <div class="drawer-toggler drawer-left-toggle open-nav d-print-none">
+                        <button class="btn icon-no-margin" data-toggler="drawers" data-action="toggle" data-target="theme_boost-drawers-courseindex" data-bs-toggle="tooltip" data-bs-placement="right" title="{{#str}}opendrawerindex, core{{/str}}">
+                            <span class="visually-hidden">{{#str}}opendrawerindex, core{{/str}}</span>
+                            {{#pix}} t/index_drawer, moodle {{/pix}}
+                        </button>
+                    </div>
+                {{/courseindex}}
+                {{#hasblocks}}
+                    <div class="drawer-toggler drawer-right-toggle ms-auto d-print-none">
+                        <button class="btn icon-no-margin" data-toggler="drawers" data-action="toggle" data-target="theme_boost-drawers-blocks" data-bs-toggle="tooltip" data-bs-placement="right" title="{{#str}}opendrawerblocks, core{{/str}}">
+                            <span class="visually-hidden">{{#str}}opendrawerblocks, core{{/str}}</span>
+                            <span class="dir-rtl-hide">{{#pix}}t/blocks_drawer, core{{/pix}}</span>
+                            <span class="dir-ltr-hide">{{#pix}}t/blocks_drawer_rtl, core{{/pix}}</span>
+                        </button>
+                    </div>
+                {{/hasblocks}}
+            </div>
+
+            {{#is_custom_course_page}}
+                <div class="academy-course-banner-wrapper">
+                    <div class="banner-inner">
+                        
+                        <div class="banner-course-info">
+                            <div class="course-thumbnail academy-primary-bg" style="background-image: url('{{{course_thumbnail}}}'); background-size: cover; background-position: center;"></div>
+                            
+                            <div class="course-details">
+                                <div class="meta-row">
+                                    <span class="category-text">{{course_category}}</span>
+                                    
+                                    {{#hasprogress}}
+                                        {{#is_completed}}
+                                            <span class="academy-badge completed-badge">{{#str}} completed, theme_academy_theme {{/str}}</span>
+                                        {{/is_completed}}
+                                        {{#is_in_progress}}
+                                            <span class="academy-badge progress-badge">{{#str}} in_progress, theme_academy_theme {{/str}}</span>
+                                        {{/is_in_progress}}
+                                        {{^progress}}
+                                            <span class="academy-badge start-badge">{{#str}} start_course, theme_academy_theme {{/str}}</span>
+                                        {{/progress}}
+                                    {{/hasprogress}}
+                                    {{^hasprogress}}
+                                        <span class="academy-badge free-badge">{{#str}} free, theme_academy_theme {{/str}}</span>
+                                    {{/hasprogress}}
+                                    
+                                </div>
+                                <h1 class="course-title">{{course_title}}</h1>
+                                
+                                <p class="course-excerpt scroll-to-overview" title="{{#str}} overview, theme_academy_theme {{/str}}">{{course_excerpt}}</p>
+                                <a href="#course-content" class="view-content-link scroll-to-content">{{#str}} view_course_content, theme_academy_theme {{/str}}</a>
+                                
+                            </div>
+                        </div>
+
+                        <div class="banner-right-spacer"></div>
+
+                    </div>
+                </div>
+            {{/is_custom_course_page}}
+            {{^is_custom_course_page}}
+                {{{ output.full_header }}}
+            {{/is_custom_course_page}}
+            <div id="page-content" class="pb-3 d-print-block">
+                
+                <div id="region-main-box">
+                    {{#hasregionmainsettingsmenu}}
+                    <div id="region-main-settings-menu" class="d-print-none">
+                        <div> {{{ regionmainsettingsmenu }}} </div>
+                    </div>
+                    {{/hasregionmainsettingsmenu}}
+                    
+                    <div id="region-main">
+                        {{#hasregionmainsettingsmenu}}
+                            <div class="region_main_settings_menu_proxy"></div>
+                        {{/hasregionmainsettingsmenu}}
+                        
+                        {{^is_custom_course_page}}
+                            {{{ output.course_content_header }}}
+                            {{#headercontent}}
+                                {{> core/activity_header }}
+                            {{/headercontent}}
+                        {{/is_custom_course_page}}
+                        
+                        {{#overflow}}
+                            <div class="container-fluid tertiary-navigation">
+                                <div class="navitem">
+                                    {{> core/url_select}}
+                                </div>
+                            </div>
+                        {{/overflow}}
+                        
+                        <div class="container-fluid px-4 px-xxl-5 mx-auto mt-5">
+                            
+                            {{#is_custom_course_page}}
+                            <div class="course-content-grid" id="course-content">
+                                
+                                <div class="course-left-column">
+                                    
+                                    <div class="course-overview-block">
+                                        <h3 class="section-title">{{#str}} overview, theme_academy_theme {{/str}}</h3>
+                                        <div class="overview-text overview-text-content">
+                                            {{{course_summary_full}}}
+                                        </div>
+                                        <a class="show-more-link show-more-btn hidden">{{#str}} show_more, theme_academy_theme {{/str}}</a>
+
+                                        <div class="rating-box mt-2">
+                                            <div class="stars">
+                                                {{{stars_html}}}
+                                                <span class="fw-bold ms-2 text-dark">{{avg_rating}}</span> <span class="text-muted">({{total_reviews}})</span>
+                                            </div>
+                                            <a href="{{{review_url}}}" class="read-reviews-link">{{#str}} leave_reviews, theme_academy_theme {{/str}}</a>
+                                        </div>
+                                    </div>
+
+                                    <div class="course-timeline-block mt-5">
+                                        <h3 class="section-title">{{#str}} learning_path, theme_academy_theme {{/str}}</h3>
+                                        <div class="course-timeline">
+                                            
+                                            {{#course_topics}}
+                                            <div class="timeline-item timeline-scroll-trigger {{#is_completed}}is-completed{{/is_completed}}" data-custom-target="accordion-item-{{id}}" data-native-target="section-{{section_num}}">
+                                                <div class="timeline-node">{{num}}</div>
+                                                <div class="timeline-content">
+                                                    <div class="d-flex justify-content-between align-items-center">
+                                                        <h5 class="topic-title mb-0">{{title}}</h5>
+                                                        {{#is_completed}}
+                                                            <span class="badge bg-success text-white" style="font-size: 0.7rem;">{{#str}} completed, theme_academy_theme {{/str}}</span>
+                                                        {{/is_completed}}
+                                                    </div>
+                                                    <span class="topic-meta mt-1 d-block"><i class="fa fa-folder-o"></i> {{modcount}}</span>
+                                                </div>
+                                            </div>
+                                            {{/course_topics}}
+                                            
+                                            {{^course_topics}}
+                                            <div class="alert alert-light text-muted border-0 shadow-sm">
+                                                {{#str}} no_topics, theme_academy_theme {{/str}}
+                                            </div>
+                                            {{/course_topics}}
+                                            
+                                        </div>
+                                    </div>
+
+                                    {{^is_editing}}
+                                    <div class="course-content-block mt-5">
+                                        <h3 class="section-title mb-2" style="font-size: 1.5rem; font-weight: 700; color: #1A202C;">{{#str}} course_content, theme_academy_theme {{/str}}</h3>
+                                        <div class="course-meta-string mb-4 text-muted" style="font-size: 0.9rem;">
+                                            {{count_lessons}} {{#str}} lessons, theme_academy_theme {{/str}} &nbsp;&bull;&nbsp; {{count_topics}} {{#str}} topics, theme_academy_theme {{/str}} &nbsp;&bull;&nbsp; {{count_quizzes}} {{#str}} quizzes, theme_academy_theme {{/str}}
+                                        </div>
+
+                                        <div class="accordion academy-course-accordion" id="courseContentAccordion">
+                                            {{#course_content_sections}}
+                                            <div class="accordion-item mb-3 bg-white" id="accordion-item-{{id}}">
+                                                <h2 class="accordion-header" id="heading{{id}}">
+                                                    <button class="accordion-button {{^is_first}}collapsed{{/is_first}}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{id}}" aria-expanded="{{#is_first}}true{{/is_first}}{{^is_first}}false{{/is_first}}" aria-controls="collapse{{id}}">
+                                                        <div class="d-flex justify-content-between align-items-center w-100 ms-3">
+                                                            <span class="fw-bold text-dark" style="font-size: 1.05rem;">{{title}}</span>
+                                                            <div style="font-size: 0.9rem; font-weight: normal; color: #6B7280;">
+                                                                <strong class="text-dark">{{topics_count}}</strong> {{#str}} topics, theme_academy_theme {{/str}}
+                                                            </div>
+                                                        </div>
+                                                    </button>
+                                                </h2>
+                                                <div id="collapse{{id}}" class="accordion-collapse collapse {{#is_first}}show{{/is_first}}" aria-labelledby="heading{{id}}" data-bs-parent="#courseContentAccordion">
+                                                    <div class="accordion-body p-0">
+                                                        
+                                                        <div class="d-flex justify-content-between align-items-center bg-white px-4 py-3 border-bottom border-top">
+                                                            <span style="font-size: 0.95rem; color: #6B7280; font-weight: 500;">{{#str}} lesson_content, theme_academy_theme {{/str}}</span>
+                                                            <div style="font-size: 0.9rem; color: #6B7280;">
+                                                                <strong class="text-dark">{{progress_percent}}{{#str}} percent_complete, theme_academy_theme {{/str}}</strong> <span class="mx-2" style="color: #E2E8F0;">|</span> <strong class="text-dark">{{completed_count}}/{{topics_count}}</strong> {{#str}} steps, theme_academy_theme {{/str}}
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="activities-list px-4 py-2">
+                                                            {{#activities}}
+                                                            <div class="activity-row d-flex align-items-center justify-content-between py-3 {{#is_locked}}opacity-50{{/is_locked}}">
+                                                                <div class="d-flex align-items-center">
+                                                                    <i class="fa {{icon}} me-3" style="color: #9CA3AF; font-size: 1.1rem;"></i>
+                                                                    {{#url}}
+                                                                        <a href="{{url}}" class="text-decoration-none text-dark activity-link" style="font-size: 0.95rem; font-weight: 500;">{{title}}</a>
+                                                                    {{/url}}
+                                                                    {{^url}}
+                                                                        <span class="text-dark" style="font-size: 0.95rem; font-weight: 500;">
+                                                                            {{title}}
+                                                                            {{#is_locked}}<i class="fa fa-lock ms-2 text-muted" title="Restricted until previous steps are completed"></i>{{/is_locked}}
+                                                                        </span>
+                                                                    {{/url}}
+                                                                </div>
+                                                                <div class="completion-status ms-3">
+                                                                    {{#is_completed}}
+                                                                        <i class="fa fa-check-circle" style="color: #22C55E; font-size: 1.3rem;"></i>
+                                                                    {{/is_completed}}
+                                                                    {{^is_completed}}
+                                                                        <i class="fa fa-circle-thin" style="color: #CBD5E1; font-size: 1.3rem;"></i>
+                                                                    {{/is_completed}}
+                                                                </div>
+                                                            </div>
+                                                            {{/activities}}
+                                                            {{^activities}}
+                                                                <div class="py-3 text-muted" style="font-size: 0.9rem;">{{#str}} no_activities, theme_academy_theme {{/str}}</div>
+                                                            {{/activities}}
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            {{/course_content_sections}}
+                                        </div>
+                                    </div>
+                                    
+                                    {{#total_reviews}}
+                                    <div class="course-reviews-block mt-5 pt-3">
+                                        
+                                        <div class="reviews-header mb-4 pb-3 border-bottom border-light">
+                                            <h3 class="m-0" style="font-size: 1.5rem; font-weight: 700; color: #1A202C;">
+                                                <i class="fa fa-star me-1 academy-accent-text"></i> {{avg_rating}} {{#str}} course_rating, theme_academy_theme {{/str}} &nbsp;<span style="color: #94A3B8;">&bull;</span>&nbsp; {{total_reviews}} {{#str}} reviews, theme_academy_theme {{/str}}
+                                            </h3>
+                                        </div>
+
+                                        <div class="reviews-list">
+                                            {{#recent_reviews}}
+                                            <div class="review-item mb-4 pb-4 border-bottom border-light">
+                                                <div class="d-flex align-items-center mb-3">
+                                                    <img src="{{user_pic}}" class="rounded-circle me-3" alt="{{user_name}}" style="width: 50px; height: 50px; object-fit: cover;">
+                                                    <div>
+                                                        <h6 class="m-0 fw-bold" style="font-size: 0.95rem; color: #111827;">{{user_name}}</h6>
+                                                        <div class="d-flex align-items-center mt-1">
+                                                            <span class="me-2 academy-accent-text" style="font-size: 0.85rem;">{{{stars}}}</span>
+                                                            <span style="color: #94A3B8; font-size: 0.8rem;">{{time_ago}}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="review-text-content" style="color: #4B5563; font-size: 0.95rem; line-height: 1.6;" title="Click to expand">
+                                                    {{{comment}}}
+                                                </div>
+                                            </div>
+                                            {{/recent_reviews}}
+                                        </div>
+
+                                        {{#has_more_reviews}}
+                                            <a href="{{{review_url}}}" class="btn btn-show-more-reviews w-100 mt-2 py-2 d-block text-center text-decoration-none">{{#str}} show_more_reviews, theme_academy_theme {{/str}}</a>
+                                        {{/has_more_reviews}}
+                                    
+                                    </div>
+                                    {{/total_reviews}}
+                                    
+                                    {{/is_editing}}
+
+                                    <div class="mt-5 pt-3 {{^is_editing}}d-none{{/is_editing}}">
+                                        
+                                        {{#is_editing}}
+                                        <div class="alert mb-4" style="background-color: #FFFBEB; border: 1px solid #FDE68A; color: #9A3412; border-radius: 8px;">
+                                            <i class="fa fa-pencil me-2"></i><strong>{{#str}} edit_mode_active, theme_academy_theme {{/str}}</strong> {{#str}} edit_mode_desc, theme_academy_theme {{/str}}
+                                        </div>
+                                        {{/is_editing}}
+
+                                        {{{ output.main_content }}}
+                                        {{{ output.activity_navigation }}}
+                                        {{{ output.course_content_footer }}}
+                                    </div>
+
+                                </div>
+                                
+                                <div class="course-right-column">
+                                    
+                                    <div class="banner-floating-card-container">
+                                        <div class="floating-card">
+                                            <div class="card-section-title">{{#str}} instructor, theme_academy_theme {{/str}}</div>
+                                            
+                                            <div class="instructor-info">
+                                                <div class="instructor-details">
+                                                    <img src="{{#instructor_img}}{{{instructor_img}}}{{/instructor_img}}{{^instructor_img}}https://picsum.photos/100{{/instructor_img}}" alt="{{instructor_name}}">
+                                                    <div>
+                                                        <p class="name">{{instructor_name}}</p>
+                                                        <p class="date">{{course_date}}</p>
+                                                    </div>
+                                                </div>
+                                                <a href="{{{ config.wwwroot }}}/message/index.php" target="_blank" style="text-decoration: none;">
+                                                    <i class="fa fa-comment-o chat-icon" title="Message Instructor"></i>
+                                                </a>
+                                            </div>
+
+                                            <a href="{{{participants_url}}}" class="enrolled-users text-decoration-none" title="View all participants">
+                                                <div class="avatars">
+                                                    {{#enrolled_avatars}}
+                                                    <img src="{{{url}}}" alt="{{name}}" title="{{name}}">
+                                                    {{/enrolled_avatars}}
+                                                </div>
+                                                <span class="text">
+                                                    {{#has_multiple_enrolled}}+{{extra_enrolled_count}} {{#str}} enrolled, theme_academy_theme {{/str}}{{/has_multiple_enrolled}}
+                                                    {{^has_multiple_enrolled}}{{enrolled_count}} {{#str}} enrolled, theme_academy_theme {{/str}}{{/has_multiple_enrolled}}
+                                                </span>
+                                            </a>
+
+                                            <button class="btn-status">{{course_status}}</button>
+                                            <a href="{{{continue_url}}}" class="btn-action d-block text-center text-decoration-none" style="color: #ffffff !important;">{{continue_btn_text}}</a>
+
+                                            <div class="card-section-title">{{#str}} course_includes, theme_academy_theme {{/str}}</div>
+                                            <ul class="course-includes-list">
+                                                <li><i class="fa fa-file-text-o"></i> {{count_lessons}} {{#str}} lessons, theme_academy_theme {{/str}}</li>
+                                                <li><i class="fa fa-list-ul"></i> {{count_topics}} {{#str}} topics, theme_academy_theme {{/str}}</li>
+                                                <li><i class="fa fa-question-circle-o"></i> {{count_quizzes}} {{#str}} quizzes, theme_academy_theme {{/str}}</li>
+                                                
+                                                {{#has_certificate}}
+                                                <li>
+                                                    {{#certificate_unlocked}}
+                                                        <i class="fa fa-certificate" title="{{#str}} certificate_unlocked, theme_academy_theme {{/str}}"></i>
+                                                    {{/certificate_unlocked}}
+                                                    {{^certificate_unlocked}}
+                                                        <i class="fa fa-certificate" title="{{#str}} complete_to_unlock, theme_academy_theme {{/str}}"></i>
+                                                    {{/certificate_unlocked}}
+                                                    {{#str}} course_certificate, theme_academy_theme {{/str}}
+                                                </li>
+                                                {{/has_certificate}}
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="progress-card">
+                                        <div class="card-section-title">{{#str}} your_progress, theme_academy_theme {{/str}}</div>
+                                        <div class="progress mt-3 mb-3" style="height: 4px;">
+                                            <div class="progress-bar academy-primary-bg" role="progressbar" style="width: {{progress}}%;"></div>
+                                        </div>
+                                        <div class="fw-bold text-dark mb-1" style="font-size: 0.9rem;">{{progress}}{{#str}} percent_complete, theme_academy_theme {{/str}}</div>
+                                        <div class="text-muted" style="font-size: 0.75rem;">{{last_accessed_date}}</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            {{/is_custom_course_page}}
+
+                            {{^is_custom_course_page}}
+                            <div class="row">
+                                <div class="col-12 mt-4 mb-5">
+                                    {{{ output.main_content }}}
+                                    {{{ output.activity_navigation }}}
+                                    {{{ output.course_content_footer }}}
+                                </div>
+                            </div>
+                            {{/is_custom_course_page}}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{> theme_boost/footer }}
+    </div>
+    {{{ output.standard_after_main_region_html }}}
+</div>
+
+</body>
+</html>
+{{#js}}
+M.util.js_pending('theme_boost/loader');
+require(['theme_boost/loader', 'theme_boost/drawer', 'jquery'], function(Loader, Drawer, $) {
+    Drawer.init();
+    M.util.js_complete('theme_boost/loader');
+    
+    $(document).ready(function() {
+        // Course Page Overview Text Expansion Logic
+        $('.overview-text-content').each(function() {
+            if (this.scrollHeight > this.clientHeight) {
+                $(this).addClass('clamped');
+                $('.show-more-btn').removeClass('hidden');
+            }
+        });
+
+        $('.show-more-btn, .overview-text-content').click(function(e) {
+            e.preventDefault();
+            var $text = $('.overview-text-content');
+            var $btn = $('.show-more-btn');
+            
+            if ($text.hasClass('clamped')) {
+                $text.removeClass('clamped').addClass('expanded');
+                $btn.text('{{#str}} show_less, theme_academy_theme {{/str}}');
+            } else if ($text.hasClass('expanded')) {
+                $text.removeClass('expanded').addClass('clamped');
+                $btn.text('{{#str}} show_more, theme_academy_theme {{/str}}');
+            }
+        });
+
+        // --- Smooth Scroll & Expand for Learning Path Timeline ---
+        $('.timeline-scroll-trigger').click(function(e) {
+            e.preventDefault();
+            
+            // Get the ID of the target accordion section from the data attribute
+            var targetId = $(this).data('custom-target');
+            var $targetElement = $('#' + targetId);
+            
+            if ($targetElement.length) {
+                // 1. Calculate offset (subtracting ~100px to account for the fixed navbar)
+                var scrollOffset = $targetElement.offset().top - 100; 
+                
+                // 2. Smoothly animate the scroll
+                $('html, body').animate({
+                    scrollTop: scrollOffset
+                }, 500, 'swing');
+                
+                // 3. Automatically open the accordion section if it is closed
+                var $accordionBtn = $targetElement.find('.accordion-button');
+                if ($accordionBtn.hasClass('collapsed')) {
+                    $accordionBtn.click();
+                }
+                
+                // 4. Highlight the section temporarily for UX feedback
+                $targetElement.addClass('academy-section-highlight');
+                
+                // Remove the highlight after 1.5 seconds
+                setTimeout(function() {
+                    $targetElement.removeClass('academy-section-highlight');
+                }, 1500);
+            }
+        });
+
+        // --- Smooth Scroll for Banner Links ---
+        // 1. Scroll to Overview when clicking the course excerpt paragraph
+        $('.scroll-to-overview').click(function(e) {
+            e.preventDefault();
+            var $target = $('.course-overview-block');
+            
+            if ($target.length) {
+                // Offset by 100px to account for the fixed top navbar
+                var scrollOffset = $target.offset().top - 100; 
+                $('html, body').animate({
+                    scrollTop: scrollOffset
+                }, 500, 'swing');
+            }
+        });
+
+        // 2. Scroll to Course Content when clicking the 'View course content' link
+        $('.scroll-to-content').click(function(e) {
+            e.preventDefault();
+            
+            // Target the custom accordion block first
+            var $target = $('.course-content-block');
+            
+            // If Edit Mode is ON, the custom block is hidden, so fallback to the native content wrapper
+            if ($target.length === 0 || $target.is(':hidden')) {
+                $target = $('#course-content');
+            }
+            
+            if ($target.length) {
+                // Offset by 100px to account for the fixed top navbar
+                var scrollOffset = $target.offset().top - 100; 
+                $('html, body').animate({
+                    scrollTop: scrollOffset
+                }, 600, 'swing');
+            }
+        });
+
+    });
+});
+{{/js}}

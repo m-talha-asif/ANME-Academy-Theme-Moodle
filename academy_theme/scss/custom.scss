@@ -1,0 +1,3160 @@
+// theme/academy_theme/scss/custom.scss
+
+// ==========================================
+// 1. Core Variables
+// ==========================================
+$primary-navy: #1B365D !default; 
+$accent-orange: #ED8936 !default; // Add this line!
+$bg-light: #F4F5F7;
+$card-radius: 12px;
+
+// ==========================================
+// Dynamic Theme Utility Classes
+// ==========================================
+.academy-primary-text { color: $primary-navy !important; }
+.academy-primary-bg { background-color: $primary-navy !important; }
+.academy-accent-text { color: $accent-orange !important; }
+.academy-accent-bg { background-color: $accent-orange !important; }
+.academy-accent-border { border-color: $accent-orange !important; }
+
+// ==========================================
+// 2. Global Body Styling
+// ==========================================
+$custom-font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+body {
+    background-color: $bg-light;
+    font-family: $custom-font-family !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6, 
+.h1, .h2, .h3, .h4, .h5, .h6,
+.btn, .nav-link, .dropdown-item {
+    font-family: $custom-font-family !important;
+}
+
+// ==========================================
+// 3. Override Moodle's Primary Brand Color
+// ==========================================
+a {
+    color: $primary-navy;
+    transition: color 0.2s ease;
+    
+    &:hover {
+        color: $accent-orange; 
+    }
+}
+
+.btn-primary {
+    background-color: $primary-navy;
+    border-color: $primary-navy;
+    border-radius: 20px; 
+    
+    &:hover {
+        background-color: $accent-orange !important; 
+        border-color: $accent-orange !important;
+        color: #ffffff !important;
+    }
+}
+
+// ==========================================
+// 4. Style the Moodle Blocks
+// ==========================================
+.block {
+    background-color: #ffffff;
+    border: none;
+    border-radius: $card-radius;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); 
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+// ==========================================
+// 5. Custom Navbar Styling
+// ==========================================
+.navbar {
+    padding-top: 0; 
+    padding-bottom: 0;
+    height: 70px;
+    border-bottom: 1px solid #E2E8F0 !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.03); 
+    z-index: 1050;
+    
+    justify-content: flex-start !important; 
+
+    .primary-navigation {
+        margin-right: 0 !important;
+        flex-grow: 0 !important; 
+    }
+
+    .navbar-brand {
+        margin-right: 2rem !important; 
+        
+        .academy-logo {
+            max-height: 45px !important; 
+            width: auto !important;      
+            object-fit: contain !important; 
+        }
+    }
+
+    .simplesearchform, form {
+        .input-group {
+            border: 1px solid #E2E8F0 !important; 
+            border-radius: 8px !important;
+            background-color: #ffffff !important;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+
+            .btn, .input-group-text, .input-group-prepend {
+                border: none !important;
+                background-color: transparent !important;
+                box-shadow: none !important;
+                color: #A0AEC0; 
+                margin: 0 !important;
+            }
+
+            input.form-control, input.custom-search-bg {
+                border: none !important;
+                background-color: transparent !important;
+                box-shadow: none !important;
+                padding-left: 0 !important; 
+                min-width: 250px; 
+                
+                &:focus {
+                    outline: none !important;
+                    background-color: transparent !important;
+                }
+            }
+        }
+    }
+}
+
+// ==========================================
+// 6. Learning Programs (Course Cards Carousel)
+// ==========================================
+.block_myoverview, .block-myoverview {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+
+    > .card-body > .card-title.d-inline {
+        display: none !important;
+    }
+    > .card-body {
+        padding: 0 !important;
+    }
+
+    .academy-course-carousel {
+        [data-region="paged-content-page"] {
+            display: block !important;
+            width: 100% !important;
+        }
+
+        .row, .dashboard-card-deck, .card-deck {
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            overflow-x: auto !important;
+            justify-content: flex-start !important; 
+            gap: 1.5rem !important; 
+            padding-bottom: 2rem !important; 
+            margin: 0 !important; 
+            
+            &::-webkit-scrollbar { display: none; }
+            -ms-overflow-style: none; 
+            scrollbar-width: none; 
+            
+            > div, > [class*="col-"] {
+                flex: 0 0 260px !important; 
+                width: 260px !important;
+                max-width: 260px !important;
+                padding: 0 !important; 
+                margin: 0 !important;
+            }
+            
+            .dashboard-card {
+                width: 100% !important; 
+                margin: 0 !important; 
+            }
+        }
+    }
+
+    .academy-carousel-controls button {
+        width: 36px;
+        height: 36px;
+        background-color: #727b8a; 
+        color: white;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        
+        &:hover {
+            background-color: $accent-orange; 
+            transform: scale(1.05);
+        }
+        
+        i { font-size: 0.9rem; }
+    }
+
+    .academy-card {
+        border: 1px solid #E2E8F0 !important; 
+        border-radius: 12px !important;       
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+        background-color: #ffffff;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        padding: 0.5rem !important; 
+
+        &:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08) !important;
+        }
+
+        .academy-card-img {
+            height: 140px;
+            width: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-radius: 8px !important; 
+            background-color: #F3F4F6;
+            display: block; 
+        }
+
+        .card-content {
+            padding: 0.25rem 0.5rem !important;
+        }
+
+        .course-name {
+            font-weight: 700 !important;
+            color: #111827 !important; 
+            font-size: 1.05rem;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+            
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .academy-meta-text {
+            font-size: 0.7rem;
+            color: #6B7280;
+            font-weight: 500;
+        }
+
+        .academy-badge {
+            font-size: 0.65rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 20px; 
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            text-transform: capitalize;
+            
+            &.progress-badge { background-color: #1E3A8A; color: #fff; } 
+            &.start-badge { background-color: #EF4444; color: #fff; }    
+            &.free-badge { background-color: #22C55E; color: #fff; } 
+            &.completed-badge { background-color: #10B981; color: #fff; }    
+        }
+
+        .academy-progress {
+            height: 6px !important;
+            border-radius: 6px !important;
+            background-color: #E5E7EB !important;
+            margin-top: 0;
+            overflow: hidden;
+            
+            .progress-bar {
+                background-color: #1E3A8A !important; 
+                border-radius: 6px !important;
+            }
+        }
+    }
+}
+
+// ==========================================
+// 7. Quick Links Block Styling
+// ==========================================
+.quick-links-block {
+    background: #ffffff;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+
+    h4 {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #1A202C;
+        margin-bottom: 1.25rem;
+    }
+
+    .q-link-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.8rem 1rem;
+        border: 1px solid #E2E8F0;
+        border-radius: 8px;
+        margin-bottom: 0.75rem;
+        color: #4A5568;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        font-size: 0.9rem;
+        font-weight: 500;
+
+        .icon-left {
+            width: 20px;
+            margin-right: 12px;
+            color: #A0AEC0;
+            transition: color 0.2s ease;
+        }
+        
+        .icon-right {
+            font-size: 0.8rem;
+            color: #A0AEC0;
+            transition: color 0.2s ease;
+            transform: rotate(-45deg); 
+        }
+
+        &:hover {
+            background-color: $accent-orange; 
+            border-color: $accent-orange;
+            color: #ffffff;
+            
+            .icon-left, .icon-right {
+                color: #ffffff;
+            }
+        }
+    }
+}
+
+// ==========================================
+// 8. Quick Links Plugin Block Override
+// ==========================================
+.block_quicklinks {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    border: none !important;
+    margin-bottom: 2rem;
+
+    > .card-body {
+        padding: 0 !important;
+    }
+}
+
+// ==========================================
+// 9. Employee Spotlight Block Override
+// ==========================================
+.block_spotlight {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin-bottom: 2rem;
+
+    > .card-body > .card-title.d-inline {
+        display: none !important;
+    }
+    
+    > .card-body {
+        padding: 0 !important;
+    }
+
+    .spotlight-container {
+        background: linear-gradient(135deg, $primary-navy 0%, $accent-orange 100%) !important; 
+        border-radius: $card-radius;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    }
+
+    .card {
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        background-color: #ffffff;
+        
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15) !important;
+        }
+
+        .card-body {
+            padding: 1.25rem;
+            
+            h6 {
+                color: $primary-navy;
+                font-size: 1rem;
+            }
+        }
+    }
+
+    .spotlight-controls button {
+        width: 32px;
+        height: 32px;
+        padding: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: $primary-navy;
+        background-color: #ffffff;
+        transition: transform 0.2s ease;
+        
+        &:hover {
+            transform: scale(1.1);
+            background-color: #f0f0f0;
+        }
+    }
+}
+
+// ==========================================
+// 10. Page Layout & User Menu 
+// ==========================================
+#page.drawers {
+    margin-top: 70px;
+    background-color: #F4F5F7; 
+    
+    .main-inner {
+        background-color: #fff;
+        border-radius: 30px 30px 0 0; 
+        margin-top: 15px; 
+        padding-top: 20px;
+        min-height: calc(100vh - 85px);
+        box-shadow: 0 -5px 15px rgba(0,0,0,0.02);
+    }
+}
+
+.usermenu {
+    .dropdown-toggle::after {
+        display: none !important; 
+    }
+    
+    .usertext {
+        display: none !important;
+    }
+    
+    .dropdown-toggle {
+        padding-right: 0 !important;
+        display: flex !important;
+        align-items: center !important;
+    }
+    
+    .avatars {
+        margin: 0 !important;
+        padding: 0 !important;
+        
+        .avatar, .userinitials {
+            width: 40px !important;
+            height: 40px !important;
+            border-radius: 50% !important;
+            background-color: #111827 !important; 
+            color: #ffffff !important; 
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            font-size: 15px !important;
+            font-weight: 600 !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            border: none !important;
+            box-shadow: none !important;
+            overflow: hidden !important; 
+        }
+
+        img.userpicture {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important; 
+            border-radius: 50% !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            box-shadow: none !important; 
+        }
+    }
+}
+
+// ==========================================
+// 11. Dropdown Menu Alignment Fixes
+// ==========================================
+.navbar {
+    .nav-item.dropdown,
+    .usermenu {
+        position: relative !important;
+    }
+
+    .dropdown-menu {
+        position: absolute !important;
+        transform: none !important;        
+        inset: auto !important;            
+        will-change: unset !important;     
+        
+        top: 100% !important;              
+        margin-top: 15px !important;       
+        
+        border: 1px solid #E2E8F0 !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+        border-radius: 8px !important;
+        
+        z-index: 1060 !important; 
+    }
+
+    .nav-item.dropdown .dropdown-menu,
+    .usermenu .dropdown-menu {
+        right: 0 !important;               
+        left: auto !important;
+    }
+}
+
+// ==========================================
+// 12. Secondary Nav to Gear Dropdown
+// ==========================================
+.academy-gear-menu {
+    .academy-settings-dropdown {
+        padding: 0.5rem;
+        
+        .moremenu {
+            height: auto !important;
+            
+            .nav-tabs, .nav-pills, ul.nav {
+                display: flex !important;
+                flex-direction: column !important;
+                flex-wrap: nowrap !important;
+                border: none !important;
+                background: transparent !important;
+                
+                .nav-item {
+                    &.d-none { display: none !important; }
+                    &:not(.d-none) { display: block !important; }
+                    
+                    width: 100% !important;
+                    margin: 0 !important;
+                    
+                    .nav-link, .dropdown-item {
+                        border: none !important;
+                        background: transparent !important;
+                        color: #4A5568 !important;
+                        padding: 0.5rem 1rem !important;
+                        border-radius: 6px !important;
+                        text-align: left !important;
+                        font-weight: 500 !important;
+                        display: block !important;
+                        width: 100% !important;
+                        
+                        &:hover, &:focus {
+                            background-color: rgba($accent-orange, 0.08) !important; 
+                            color: $accent-orange !important; 
+                        }
+                        
+                        &.active {
+                            font-weight: 700 !important;
+                            color: $accent-orange !important;            
+                            background-color: rgba($accent-orange, 0.08) !important; 
+                        }
+                    }
+                }
+                
+                .nav-item.dropdown,
+                .dropdownmoremenu,
+                [data-region="morebutton"] {
+                    &.d-none { display: none !important; }
+
+                    > a.nav-link,
+                    > a.dropdown-toggle {
+                        display: flex !important;
+                        justify-content: space-between !important;
+                        align-items: center !important;
+                        visibility: visible !important;
+                        height: auto !important;
+                        padding: 0.5rem 1rem !important;
+                        margin: 0 !important;
+                        border: none !important;
+                        color: #4A5568 !important;
+                        font-weight: 500 !important;
+                        background: transparent !important;
+                        border-radius: 6px !important;
+                        width: 100% !important;
+
+                        &:hover, &:focus {
+                            background-color: rgba($accent-orange, 0.08) !important; 
+                            color: $accent-orange !important; 
+                        }
+                    }
+                    
+                    > .dropdown-menu {
+                        display: none !important; 
+                        position: static !important; 
+                        float: none !important;
+                        background: transparent !important;
+                        border: none !important;
+                        box-shadow: none !important;
+                        transform: none !important;
+                        padding: 0 0 0 0.5rem !important;
+                        margin: 0.25rem 0 0.25rem 1rem !important; 
+                        border-left: 2px solid #E2E8F0 !important; 
+                        min-width: 0 !important;
+                    }
+                    
+                    &.show > .dropdown-menu,
+                    > .dropdown-menu.show {
+                        display: block !important;
+                    }
+
+                    &:not(.show) > .dropdown-menu {
+                        display: none !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ==========================================
+// 13. Universal Navbar Dropdown Arrows & Focus Fixes
+// ==========================================
+.navbar {
+    a:focus, button:focus, .nav-link:focus, .nav-link:active, .dropdown-toggle:focus, .dropdown-toggle:active {
+        outline: none !important;               
+        box-shadow: none !important;            
+        background-color: transparent !important;          
+    }
+
+    .dropdown-menu .dropdown-item {
+        color: #4A5568 !important;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        
+        &:hover, &:focus, &:active {
+            background-color: rgba($accent-orange, 0.08) !important; 
+            color: $accent-orange !important;            
+            outline: none !important;
+            box-shadow: none !important;
+        }
+    }
+
+    .nav-link.dropdown-toggle::after,
+    .academy-gear-menu > a.nav-link::after,
+    .academy-settings-dropdown .moremenu .dropdownmoremenu > a::after,
+    .academy-settings-dropdown .moremenu [data-region="morebutton"] > a::after,
+    .academy-settings-dropdown .moremenu a.dropdown-toggle::after {
+        display: inline-block !important;
+        margin-left: 6px !important;
+        vertical-align: middle !important;
+        content: "" !important;
+        font-family: inherit !important; 
+        border-top: 0.35em solid !important; 
+        border-right: 0.35em solid transparent !important;
+        border-bottom: 0 !important;
+        border-left: 0.35em solid transparent !important;
+        border-radius: 0 !important;
+        width: 0 !important; 
+        height: 0 !important;
+        transition: transform 0.2s ease !important;
+    }
+
+    .nav-link.dropdown-toggle[aria-expanded="true"]::after,
+    .academy-gear-menu > a.nav-link[aria-expanded="true"]::after,
+    .academy-settings-dropdown .moremenu .dropdownmoremenu > a[aria-expanded="true"]::after,
+    .academy-settings-dropdown .moremenu [data-region="morebutton"] > a[aria-expanded="true"]::after,
+    .academy-settings-dropdown .moremenu a.dropdown-toggle[aria-expanded="true"]::after {
+        transform: rotate(180deg) !important;
+    }
+
+    .academy-settings-dropdown .moremenu a.nav-link:not(.dropdown-toggle):not([data-region="morebutton"] > a):not(.dropdownmoremenu > a) {
+        &::after {
+            display: none !important;
+            content: none !important;
+            border: none !important;
+        }
+    }
+}
+
+// ==========================================
+// 14. Frontpage Hero Banner Updates
+// ==========================================
+.academy-hero-wrapper {
+    background-color: #F4F7F9; 
+    
+    .hero-title {
+        color: #1F2937;
+        font-size: 1.85rem;
+        font-weight: 400;
+        margin-bottom: 2.5rem;
+    }
+
+    .academy-dashboard-hero {
+        background: linear-gradient(135deg, $accent-orange 0%, $primary-navy 10%) !important; 
+        border-radius: 16px;
+        overflow: hidden;
+        
+        .hero-content {
+            z-index: 2;
+            position: relative;
+
+            // Restrict text width even if no video is present
+            h1, h2, h3, h4, h5, h6, 
+            .hero-title,
+            p.fw-light,
+            .d-flex {
+                max-width: 650px; 
+            }
+
+            @media (max-width: 991px) {
+                h1, h2, h3, h4, h5, h6, 
+                .hero-title,
+                p.fw-light,
+                .d-flex {
+                    max-width: 100%;
+                }
+            }
+            
+            // Allow long text to scroll vertically without breaking the layout
+            p.fw-light {
+                font-size: 1rem !important;       // Decreased font size
+                line-height: 1.6 !important;      // Clean line height
+                max-height: 4.8rem !important;    // 3 lines (3 * 1.6rem)
+                overflow-y: auto !important;      // Scrollable vertically
+                display: block !important;
+                padding-right: 15px;              // Space for the scrollbar
+                
+                // Elegant custom scrollbar
+                scrollbar-width: thin; 
+                scrollbar-color: rgba(255, 255, 255, 0.3) transparent; 
+                
+                &::-webkit-scrollbar {
+                    width: 4px;
+                }
+                &::-webkit-scrollbar-track {
+                    background: transparent;
+                }
+                &::-webkit-scrollbar-thumb {
+                    background: rgba(255, 255, 255, 0.3);
+                    border-radius: 4px;
+                }
+            }
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='1200' height='400' viewBox='0 0 1200 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M 1200 -50 C 1000 100, 950 200, 1150 450' fill='none' stroke='#{$accent-orange-svg}' stroke-width='8'/%3E%3Cpath d='M 500 450 C 600 300, 850 350, 1100 50' fill='none' stroke='#{$accent-orange-svg}' stroke-width='8'/%3E%3C/svg%3E");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 1;
+            opacity: 0.9;
+        }
+
+        .hero-carousel-track {
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none; 
+            -ms-overflow-style: none; 
+            
+            &::-webkit-scrollbar {
+                display: none; 
+            }
+            
+            .hero-slide {
+                flex: 0 0 100%;
+                width: 100%;
+                scroll-snap-align: center; 
+            }
+        }
+    }
+
+    .hero-nav-arrow {
+        width: 48px;
+        height: 48px;
+        background-color: #64748B;
+        color: white;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+        
+        &:hover {
+            background-color: $accent-orange; 
+            transform: scale(1.05);
+        }
+        
+        i {
+            font-size: 1.1rem;
+        }
+    }
+}
+
+// ==========================================
+// 15. Frontpage Full-Width (Edge-to-Edge) Fix
+// ==========================================
+#page.academy-frontpage-layout {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    
+    .main-inner {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;          
+        padding: 0 !important;         
+        border-radius: 0 !important;   
+    }
+
+    .academy-hero-wrapper {
+        margin: 0 0 3rem 0 !important; 
+        border-radius: 0 !important;   
+        padding: 3rem 2rem 4rem 2rem;  
+    }
+
+    #page-content,
+    #region-main-box, 
+    #region-main {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    #region-main {
+        padding-left: 1.5rem !important; 
+        padding-right: 1.5rem !important; 
+    }
+}
+
+// ==========================================
+// 16. Hero Help Button Overlay & Clean Up
+// ==========================================
+.academy-frontpage-layout {
+    .tool_usertours-resettourcontainer {
+        display: none !important;
+    }
+}
+
+.academy-help-container {
+    position: absolute;
+    bottom: -30px; 
+    left: 0;
+    right: 0;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 0 3rem; 
+    pointer-events: none; 
+    z-index: 10;
+    
+    display: flex !important;
+    justify-content: flex-end !important;
+    
+    .academy-help-btn {
+        pointer-events: auto; 
+        width: 60px;
+        height: 60px;
+        padding: 0;
+        background-color: $primary-navy; 
+        border: 3px solid #ffffff; 
+        border-radius: 50% !important; 
+        transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        
+        .inner-circle {
+            width: 26px;
+            height: 26px;
+            background-color: #ffffff;
+            border-radius: 50%;
+            color: $primary-navy; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s ease;
+            
+            i { 
+                font-size: 1rem; 
+                font-weight: 900;
+                margin-top: 1px; 
+            }
+        }
+        
+        &:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            background-color: $accent-orange; 
+            
+            .inner-circle {
+                color: $accent-orange; 
+            }
+        }
+    }
+}
+
+// ==========================================
+// 17. Responsive & Mobile Adjustments
+// ==========================================
+
+@media (max-width: 991.98px) {
+    .academy-hero-wrapper {
+        padding: 2rem 1rem 3rem 1rem !important; 
+        
+        .hero-title {
+            font-size: 1.5rem; 
+            margin-bottom: 2rem;
+        }
+    }
+
+    .academy-dashboard-hero {
+        .hero-content {
+            padding: 2rem !important; 
+        }
+    }
+
+    #page.academy-frontpage-layout {
+        #region-main {
+            padding-left: 0 !important; // Removed side padding
+            padding-right: 0 !important; // Removed side padding
+        }
+    }
+}
+
+@media (max-width: 575.98px) {
+    .academy-hero-wrapper {
+        padding: 1.5rem 0.5rem 2.5rem 0.5rem !important;
+        
+        .hero-title {
+            font-size: 1.3rem; 
+            margin-bottom: 1.5rem;
+        }
+    }
+
+    .academy-dashboard-hero {
+        border-radius: 12px; 
+        
+        .hero-content {
+            padding: 1.5rem !important;
+            
+            p {
+                font-size: 1rem !important; 
+            }
+        }
+        
+        .video-thumbnail {
+            height: 200px !important; 
+        }
+    }
+
+    .academy-help-container {
+        padding: 0 1rem !important; 
+        
+        .academy-help-btn {
+            width: 50px; 
+            height: 50px;
+            
+            .inner-circle {
+                width: 22px;
+                height: 22px;
+                
+                i {
+                    font-size: 0.85rem;
+                }
+            }
+        }
+    }
+}
+
+// ==========================================
+// 18. Navbar Mobile Responsiveness
+// ==========================================
+
+@media (max-width: 991.98px) {
+    .navbar {
+        .academy-logo {
+            height: 35px !important;
+        }
+
+        .academy-mobile-edit {
+            .custom-control-label {
+                font-size: 0 !important; 
+                &::before, &::after {
+                    content: "" !important;
+                    display: block !important;
+                }
+            }
+            .media-body, span:not(.slider) {
+                display: none !important;
+            }
+            .custom-switch {
+                padding-left: 2.25rem !important; 
+            }
+        }
+        
+        #academyNavCollapse {
+            background-color: #ffffff;
+            border-top: 1px solid #E2E8F0;
+            margin-left: -0.5rem;
+            margin-right: -0.5rem;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            padding-bottom: 0; 
+            position: relative; 
+            z-index: 1050;
+        }
+
+        .navbar-nav:not(.flex-row) {
+            .dropdown-menu {
+                position: static !important;
+                box-shadow: none !important;
+                border: none !important;
+                border-left: 2px solid #E2E8F0 !important; 
+                background-color: transparent !important;
+                border-radius: 0 !important;
+                padding: 0 0 0 0.5rem !important;
+                margin: 0.5rem 0 0.5rem 1rem !important; 
+
+                li { 
+                    margin-bottom: 2px; 
+                }
+
+                .dropdown-item {
+                    padding: 0.6rem 1rem !important;
+                    border-radius: 6px !important;
+                    color: #4A5568 !important;
+                    font-weight: 500;
+                    background-color: transparent !important; 
+                    transition: all 0.2s ease;
+
+                    &:hover, &:focus, &:active {
+                        background-color: rgba($accent-orange, 0.08) !important; 
+                        color: $primary-navy !important;
+                    }
+                }
+
+                .dropdown-divider {
+                    border-top-color: #E2E8F0;
+                    margin: 0.5rem 0;
+                }
+            }
+        }
+
+        .navbar-nav.flex-row {
+            background-color: #F8FAFC; 
+            border-top: 1px solid #E2E8F0 !important;
+            border-radius: 0 0 12px 12px;
+            padding: 1rem 1.5rem !important;
+            justify-content: space-between; 
+            align-items: center;
+            position: relative !important; 
+
+            .nav-item.dropdown {
+                position: static !important; 
+            }
+
+            > .nav-item > .dropdown-menu {
+                position: absolute !important;
+                top: 100% !important;          
+                left: 0.5rem !important;       
+                right: 0.5rem !important;      
+                margin-top: 0.5rem !important; 
+                width: auto !important;
+                background-color: #ffffff !important;
+                border: 1px solid #E2E8F0 !important;
+                box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+                border-radius: 12px !important;
+                padding: 0.5rem !important;
+                z-index: 1060;
+
+                .dropdown-item {
+                    padding: 0.75rem 1rem !important;
+                    border-radius: 8px !important;
+                    font-weight: 500;
+                    color: #4A5568;
+
+                    &:hover, &:active {
+                        background-color: rgba($accent-orange, 0.08) !important;
+                        color: $primary-navy !important;
+                    }
+                }
+
+                .dropdown-header {
+                    padding: 0.5rem 1rem 0.75rem 1rem;
+                    font-weight: 700;
+                    color: #94A3B8;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                    font-size: 0.75rem;
+                }
+            }
+        }
+    }
+}
+
+// ==========================================
+// 19. Edit Mode Switch Clean Up
+// ==========================================
+.academy-mobile-edit {
+    border: none !important;
+    
+    form, .editmode-switch-form, .nav-link, .btn {
+        border: none !important;
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+    }
+
+    .custom-control-input:focus ~ .custom-control-label::before,
+    .form-check-input:focus {
+        box-shadow: none !important;
+        outline: none !important;
+    }
+}
+
+.academy-footer {
+    background-color: darken($primary-navy, 20%); 
+    color: #9CA3AF; 
+    font-family: $custom-font-family;
+    padding-top: 5rem !important; 
+    padding-bottom: 1.5rem !important;
+    margin-top: 4rem; 
+    border-top: 1px solid rgba(255, 255, 255, 0.1); 
+
+    .footer-logo {
+        max-height: 190px !important; 
+        width: 100% !important;       
+        max-width: 170px !important;  
+        object-fit: contain !important;
+        display: block;
+        margin: 0 auto;               
+    }
+
+    .footer-heading {
+        color: #ffffff; 
+        font-size: 1.05rem; 
+        font-weight: 700; 
+        margin-bottom: 1.75rem; 
+        letter-spacing: 0.3px;
+    }
+
+    .footer-links {
+        padding-left: 0 !important; // Forces flush left alignment
+        margin-left: 0 !important;
+        
+        li {
+            margin-bottom: 1.15rem; 
+            
+            a {
+                color: #9CA3AF;
+                font-size: 0.85rem; 
+                text-decoration: none;
+                transition: color 0.2s ease;
+                display: inline-block;
+
+                &:hover, &:focus {
+                    color: #ffffff; 
+                }
+            }
+        }
+    }
+
+    .footer-contact {
+        padding-left: 0 !important; // Forces flush left alignment
+        margin-left: 0 !important;
+        
+        li {
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 16px; 
+            color: #9CA3AF;
+            font-size: 0.85rem; 
+            line-height: 1.6; 
+            
+            a, span {
+                flex: 1; 
+            }
+
+            a {
+                color: #9CA3AF;
+                text-decoration: none;
+                transition: color 0.2s ease;
+                
+                &:hover {
+                    color: #ffffff; 
+                }
+            }
+            
+            i {
+                font-size: 1.1rem; 
+                margin-top: 4px; 
+                width: 20px; 
+                text-align: center;
+                color: #ffffff; 
+                flex-shrink: 0; 
+            }
+        }
+    }
+
+    .footer-social {
+        padding-left: 0 !important; // Forces flush left alignment
+        margin-left: 0 !important;
+        
+        li {
+            margin-bottom: 1.15rem;
+
+            a {
+                color: #9CA3AF;
+                font-size: 0.85rem;
+                text-decoration: none;
+                transition: color 0.2s ease;
+                display: flex;
+                align-items: center;
+                gap: 16px; 
+
+                &:hover, &:focus {
+                    color: #ffffff; 
+                }
+                
+                i {
+                    font-size: 1.2rem;
+                    width: 20px;
+                    text-align: center;
+                    color: #ffffff; 
+                    transition: color 0.2s ease;
+                }
+            }
+        }
+    }
+
+    .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.08); 
+        color: #6B7280;
+        font-size: 0.8rem;
+        margin-top: 3rem;
+        padding-top: 1.5rem !important;
+        text-align: center !important; 
+    }
+}
+
+// Completely hide all Moodle standard footer elements to match the clean template
+.moodle-standard-footer-html {
+    display: none !important;
+}
+
+// ==========================================
+// 21. Modern Edit Switch (Restricted to Courses/Dashboards)
+// ==========================================
+.editmode-switch-form {
+    display: none !important;
+}
+
+#page-site-index,
+#page-my-index,
+.path-course-view {
+
+    .editmode-switch-form {
+        position: absolute !important;
+        top: 85px !important; 
+        right: 85px !important; 
+        z-index: 1040 !important;
+        background: #ffffff !important;
+        padding: 6px 14px !important;
+        border-radius: 30px !important;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08) !important;
+        border: 1px solid #E2E8F0 !important;
+        display: flex !important; 
+        align-items: center !important;
+        justify-content: center !important;
+        margin: 0 !important;
+
+        @media (max-width: 991px) {
+            top: 80px !important;
+            right: 65px !important;
+        }
+
+        .custom-control-label::before,
+        .custom-control-label::after,
+        .form-check-label::before,
+        .form-check-label::after {
+            display: none !important;
+            content: none !important;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        .form-check-label, label, .media-body {
+            display: none !important;
+            margin: 0 !important;
+        }
+
+        .custom-control, .custom-switch, .form-check, .input-group {
+            padding: 0 !important;
+            margin: 0 !important;
+            border: none !important;
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+
+        &::before {
+            content: 'Edit Mode' !important;
+            font-weight: 600 !important;
+            color: $primary-navy !important;
+            margin-right: 10px !important;
+            font-size: 0.85rem !important;
+            line-height: 1 !important;
+            display: block !important;
+            white-space: nowrap !important; 
+        }
+
+        input[type="checkbox"] {
+            -webkit-appearance: none !important;
+            -moz-appearance: none !important;
+            appearance: none !important;
+            
+            width: 40px !important; 
+            height: 24px !important;
+            background-color: #CBD5E1 !important; 
+            background-image: none !important; 
+            border-radius: 50px !important;
+            position: relative !important;
+            cursor: pointer !important;
+            box-sizing: border-box !important;
+            
+            outline: none !important; 
+            box-shadow: none !important; 
+            -webkit-box-shadow: none !important;
+            -webkit-tap-highlight-color: transparent !important;
+            
+            transition: background-color 0.3s ease !important;
+            margin: 0 !important;
+            padding: 0 !important;
+            float: none !important;
+            display: block !important;
+            
+            &:focus, &:active, &:hover, &:focus-visible {
+                outline: none !important;
+                box-shadow: none !important;
+                -webkit-box-shadow: none !important;
+                background-image: none !important;
+            }
+            
+            &::after {
+                content: '' !important;
+                position: absolute !important;
+                top: 50% !important;                     
+                left: 2px !important;
+                transform: translateY(-50%) !important;  
+                width: 20px !important;
+                height: 20px !important;
+                background-color: #ffffff !important;
+                border-radius: 50% !important;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.2) !important;
+                transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1) !important;
+                border: none !important;
+            }
+
+            &:checked {
+                background-color: $accent-orange !important;
+                background-image: none !important; 
+                &::after {
+                    transform: translate(16px, -50%) !important; 
+                }
+            }
+        }
+    }
+}
+
+// ==========================================
+// 22. Role-Based Visibility
+// ==========================================
+body.academy-not-admin {
+    .academy-admin-only {
+        display: none !important;
+    }
+}
+
+// ==========================================
+// 23. Birthdays & Anniversaries Block
+// ==========================================
+.birthdays-anniversaries-block {
+    background: #ffffff;
+    border: 1px solid #E2E8F0;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+
+    h4 {
+        font-weight: 700;
+        font-size: 1.1rem;
+        color: #1A202C;
+    }
+
+    .ba-nav-arrows button {
+        color: #A0AEC0;
+        font-size: 1.2rem;
+        transition: color 0.2s ease;
+        text-decoration: none;
+        
+        &:hover, &:focus { 
+            color: $accent-orange; 
+            outline: none;
+            box-shadow: none;
+        }
+    }
+
+    .ba-event-card {
+        display: flex;
+        padding: 1rem;
+        border-radius: 8px;
+        transition: transform 0.2s ease;
+        
+        &:hover {
+            transform: translateX(4px);
+        }
+        
+        // Colors grabbed from Figma mockup
+        &.bg-purple-light { background-color: #F3EFFF; }
+        &.bg-yellow-light { background-color: #FFF9E6; }
+
+        .ba-date {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 65px;
+            
+            .day-name { 
+                font-weight: 700; 
+                font-size: 0.85rem; 
+                color: #1A202C; 
+            }
+            .month-year { 
+                font-size: 0.75rem; 
+                color: #4A5568; 
+                font-weight: 500;
+            }
+        }
+
+        .ba-details {
+            border-left: 1px solid rgba(0,0,0,0.08);
+            padding-left: 1rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            .time { 
+                font-size: 0.75rem; 
+                color: #718096; 
+                font-weight: 500;
+            }
+            .event-name { 
+                font-size: 0.85rem; 
+                font-weight: 600; 
+                color: #1A202C; 
+                line-height: 1.3; 
+            }
+        }
+    }
+
+    .ba-subscribe-btn {
+        background-color: transparent;
+        border: 1px solid $accent-orange;
+        color: $accent-orange;
+        font-weight: 600;
+        font-size: 0.9rem;
+        border-radius: 8px;
+        padding: 0.75rem 1.25rem;
+        transition: all 0.2s ease;
+        
+        &:hover, &:focus {
+            background-color: rgba($accent-orange, 0.08);
+            color: $accent-orange;
+            border-color: $accent-orange;
+            outline: none;
+            box-shadow: none;
+        }
+    }
+}
+
+// ==========================================
+// 24. News & Events Block
+// ==========================================
+.news-events-section {
+    margin-top: 3rem;
+    
+    .section-header {
+        h3 {
+            font-weight: 700;
+            color: #1A202C;
+            font-size: 1.5rem;
+        }
+        .view-all-link {
+            color: $accent-orange;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+            
+            &:hover {
+                color: $accent-orange;
+                text-decoration: underline !important;
+            }
+        }
+    }
+
+    .news-card {
+        display: flex;
+        align-items: flex-start;
+        transition: transform 0.2s ease;
+        
+        &:hover {
+            transform: translateY(-2px);
+            
+            .news-title {
+                color: $primary-navy; 
+            }
+        }
+
+        .news-img-wrapper {
+            width: 140px;
+            height: 90px;
+            flex-shrink: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            border: 1px solid #E2E8F0;
+            
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+        }
+
+        .news-content {
+            padding-left: 1rem;
+            
+            .news-title {
+                font-size: 0.9rem;
+                font-weight: 700;
+                color: #1A202C;
+                line-height: 1.4;
+                margin-bottom: 0.5rem;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                transition: color 0.2s ease;
+            }
+            
+            .news-link {
+                color: $accent-orange;
+                font-size: 0.85rem;
+                font-weight: 600;
+                text-decoration: none;
+                
+                &:hover {
+                    text-decoration: underline !important;
+                    color: darken($accent-orange, 20%); 
+                }
+            }
+        }
+    }
+}
+
+// Mobile responsiveness for News & Events
+@media (max-width: 767.98px) {
+    .news-events-section {
+        .news-card {
+            flex-direction: column;
+            
+            .news-img-wrapper {
+                width: 100%;
+                height: 160px;
+                margin-bottom: 1rem;
+            }
+            
+            .news-content {
+                padding-left: 0;
+            }
+        }
+    }
+}
+
+// ==========================================
+// 25. Modern Glassmorphism Login, Forgot Password & Sign Up Pages
+// ==========================================
+body#page-login-index,
+body#page-login-forgot_password,
+body#page-login-signup {  // Full viewport setup
+    min-height: 100vh !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden !important; 
+    
+    // Dynamically creates a very dark version of your chosen primary color
+    background-color: darken($primary-navy, 15%) !important; 
+    
+    &::before {
+        content: '';
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-color: darken($primary-navy, 15%);
+        background-image: 
+            /* Added a subtle white glow so the glass has light to refract! */
+            radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.12) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba($accent-orange, 0.25) 0%, transparent 50%);
+        z-index: 0; 
+    }
+
+    .navbar,                  // <-- Hides the broken top navbar
+    #page-header, 
+    #page-footer, 
+    .academy-footer,
+    .login-illustration {
+        display: none !important;
+    }
+
+    &#page.drawers {
+        margin-top: 0 !important; // <-- Removes the empty space left by the navbar
+    }
+
+    #page-wrapper {
+        position: relative; 
+        z-index: 1;         
+        min-height: 100vh !important;
+        display: flex !important;
+        flex-direction: column !important;
+        padding: 2rem 1rem !important; 
+        background: transparent !important;
+    }
+
+    #page, 
+    #page-content, 
+    #region-main-box, 
+    #region-main,
+    .main-inner {             // <-- This removes the white box behind the form
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+        flex: 1 1 auto !important;
+    }
+
+    .login-wrapper,
+    #region-main > .card,         
+    #region-main > .box {
+        /* Dropped opacity to 35% and increased blur for true frosted glass */
+        background: rgba($primary-navy, 0.35) !important; 
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        /* Slightly stronger white border to highlight the glass edge */
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5) !important;
+        border-radius: 20px !important;
+        padding: 2rem !important; 
+        max-width: 450px !important; 
+        width: 100% !important;
+        margin: 2rem auto !important; 
+    }
+
+    // AGGRESSIVE OVERRIDE: Strip backgrounds from ALL inner grid columns and layout containers
+    .login-container, 
+    .login-container .row, 
+    .login-container .row > div, 
+    .login-container [class*="col-"],
+    .loginform, 
+    .signuppanel, 
+    .loginsignup, 
+    .card, 
+    .card-body, 
+    fieldset,
+    .bg-white, 
+    .bg-light {
+        background: transparent !important;
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+    
+    // Ensure the inner paddings don't conflict now that the boxes are gone
+    .login-container {
+        padding: 0 !important;
+    }
+
+    .login-logo {
+        text-align: center !important;
+        margin-bottom: 1.5rem !important; 
+        
+        img {
+            background: transparent !important;
+            border-radius: 0 !important;
+            padding: 0 !important;
+            box-shadow: none !important;
+            max-width: 170px !important; 
+            height: auto !important;
+            margin: 0 auto !important;
+            display: inline-block !important;
+        }
+    }
+
+    h2, h3, h4, h5, h6, p, label, .login-divider, legend, .form-text,
+    .text-muted, .text-secondary {
+        color: #F8FAFC !important;
+    }
+
+    .login-wrapper div, #region-main > .card div, #region-main > .box div {
+        color: #93C5FD !important;
+    }
+
+    legend {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+        padding-bottom: 0.5rem !important;
+        margin-bottom: 1.5rem !important;
+        margin-top: 1.5rem !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+        width: 100% !important;
+    }
+
+    .modal-content, .modal-content h1, .modal-content h2, .modal-content h3, 
+    .modal-content h4, .modal-content h5, .modal-content h6, .modal-content p, 
+    .modal-content label, .modal-content div {
+        color: #1A202C !important;
+    }
+    
+    // ==========================================
+    // Bulletproof Moodle Form Grid Alignment
+    // ==========================================
+    .mform {
+        .fitem {
+            margin-bottom: 1rem !important;
+            
+            .col-md-3 {
+                max-width: 100% !important;
+                flex: 0 0 100% !important;
+                padding: 0 0 0.25rem 0 !important;
+                text-align: left !important;
+            }
+            .col-md-9 {
+                max-width: 100% !important;
+                flex: 0 0 100% !important;
+                padding: 0 !important;
+            }
+        }
+
+        // AGGRESSIVE TARGETING: Pierces through Moodle's hidden fieldsets
+        .fitem_actionbuttons .col-md-9,
+        .fitem_actionbuttons .felement,
+        #fgroup_id_buttonar {
+            
+            fieldset, .d-flex.flex-wrap {
+                display: flex !important;
+                flex-direction: column !important; 
+                width: 100% !important;
+                gap: 12px !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+            
+            span.fitem, span.fitem_fsubmit, span.fitem_fcancel, div.fitem {
+                display: block !important;
+                width: 100% !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+                background: transparent !important;
+            }
+            
+            input[type="submit"], button, .btn, a.btn {
+                display: block !important;
+                width: 100% !important;
+                margin: 0 !important;
+            }
+        }
+    }
+
+    .loginform .forgetpass a, 
+    .forgetpass a,
+    a[href*="forgot_password"],
+    .collapseexpand { 
+        color: #93C5FD !important;
+        font-weight: 500 !important;
+        text-decoration: none !important;
+        font-size: 0.85rem !important;
+        display: inline-block !important;
+        margin-top: 0.75rem !important; 
+        transition: color 0.2s ease !important;
+
+        &:hover {
+            color: $accent-orange !important;
+        }
+    }
+
+    // Form Inputs & Select Dropdowns
+    .form-control,
+    .custom-select,
+    select {
+        background: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        color: #ffffff !important;
+        border-radius: 10px !important;
+        padding: 0.75rem 1rem !important; 
+        font-size: 0.95rem !important; 
+        margin-bottom: 0.75rem !important; 
+        width: 100% !important;
+        height: auto !important;
+
+        &::placeholder {
+            color: rgba(255, 255, 255, 0.4) !important;
+        }
+
+        &:focus {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border-color: $accent-orange !important;
+            box-shadow: 0 0 0 4px rgba(237, 137, 54, 0.2) !important;
+            outline: none !important;
+        }
+
+        option {
+            background-color: $primary-navy !important;
+            color: #ffffff !important;
+        }
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active{
+        -webkit-box-shadow: 0 0 0 30px #1e293b inset !important; 
+        -webkit-text-fill-color: white !important;
+        transition: background-color 5000s ease-in-out 0s;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        border-radius: 10px !important;
+    }
+
+    #loginbtn,
+    #id_submitbutton, 
+    input[type="submit"]:not([name="cancel"]):not(#id_cancel), 
+    button[type="submit"]:not([name="cancel"]):not(#id_cancel) {
+        background: linear-gradient(135deg, $accent-orange 0%, darken($accent-orange, 15%) 100%) !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 10px !important;
+        padding: 0.75rem !important; 
+        font-weight: 700 !important;
+        font-size: 1rem !important; 
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        width: 100% !important;
+        box-shadow: 0 4px 15px rgba(237, 137, 54, 0.3) !important;
+        transition: all 0.3s ease !important;
+
+        &:hover {
+            transform: translateY(-2px) !important;
+            box-shadow: 0 8px 20px rgba(237, 137, 54, 0.5) !important;
+            background: linear-gradient(135deg, lighten($accent-orange, 10%) 0%, $accent-orange 100%) !important;
+        }
+    }
+
+    .login-divider {
+        border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+        margin: 1rem 0 !important; 
+    }
+
+    #guestloginbtn, 
+    #id_cancel,
+    input[name="cancel"] {
+        background: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        color: #E2E8F0 !important;
+        border-radius: 10px !important;
+        padding: 0.75rem 1rem !important; 
+        width: 100% !important;
+        font-weight: 600 !important;
+        font-size: 1rem !important; 
+        transition: all 0.2s ease !important;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.1) !important;
+            color: #ffffff !important;
+            border-color: rgba(255, 255, 255, 0.3) !important;
+        }
+    }
+
+    // ==========================================
+    // Solid Navy Language Selector
+    // ==========================================
+    #page-wrapper .login-languagemenu, 
+    #page-wrapper .langmenu {
+        .dropdown-toggle, .btn {
+            background-color: $primary-navy !important; 
+            border: 1px solid #2A528A !important;
+            color: #ffffff !important;
+            border-radius: 10px !important;
+            padding: 0.7rem 1rem !important;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;
+            width: auto;
+            min-width: 150px;
+            display: inline-flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+
+            &:focus, &:active, &[aria-expanded="true"] {
+                background-color: #2A528A !important;
+                border-color: $accent-orange !important;
+                box-shadow: 0 0 0 4px rgba(237, 137, 54, 0.2) !important;
+                outline: none !important;
+            }
+
+            &::after {
+                color: #ffffff !important;
+                margin-left: 10px !important;
+            }
+        }
+
+        .dropdown-menu {
+            background-color: $primary-navy !important; 
+            backdrop-filter: none !important;               
+            -webkit-backdrop-filter: none !important;
+            border: 1px solid #2A528A !important;
+            border-radius: 10px !important;
+            margin-top: 8px !important;
+            padding: 0.5rem !important;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+
+            .dropdown-item {
+                color: #ffffff !important;
+                border-radius: 6px !important;
+                padding: 0.5rem 1rem !important;
+                transition: all 0.2s ease !important;
+                
+                &:hover, &:focus {
+                    background-color: $accent-orange !important; 
+                    color: #ffffff !important;                            
+                }
+            }
+        }
+    }
+    
+    .login-languagemenu label, .langmenu label {
+        display: none !important;
+    }
+
+    .moodle-dialogue-base .moodle-dialogue-wrap,
+    .moodle-dialogue-base .moodle-dialogue-hd,
+    .moodle-dialogue-base .moodle-dialogue-bd,
+    .moodle-dialogue,
+    .generalbox,
+    .box.py-3 {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .moodle-dialogue-base h1,
+    .moodle-dialogue-base h2,
+    .moodle-dialogue-base h3,
+    .moodle-dialogue-base h4,
+    .moodle-dialogue-base h5,
+    .moodle-dialogue-base p,
+    .moodle-dialogue-bd,
+    .generalbox h1,
+    .generalbox h2,
+    .generalbox h3,
+    .generalbox h4,
+    .generalbox h5,
+    .generalbox p,
+    .moodle-dialogue-hd * {
+        color: #F8FAFC !important;
+    }
+    
+    .moodle-dialogue-bd .btn-secondary,
+    .generalbox .btn-secondary {
+        background: rgba(255, 255, 255, 0.05) !important;
+        color: #E2E8F0 !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        border-radius: 10px !important;
+        
+        &:hover {
+            background: rgba(255, 255, 255, 0.1) !important;
+            color: #ffffff !important;
+        }
+    }
+    // ==========================================
+    // Sign-Up Confirmation Page Fix
+    // ==========================================
+    #region-main .generalbox,
+    #region-main #notice {
+        background: rgba($primary-navy, 0.8) !important; 
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5) !important;
+        border-radius: 20px !important;
+        padding: 2.5rem 2rem !important; 
+        max-width: 500px !important; 
+        width: 100% !important;
+        margin: 2rem auto !important; 
+        color: #F8FAFC !important; // Forces the bare text to be white
+        text-align: center;
+        font-size: 1.05rem;
+    }
+
+    .continuebutton {
+        max-width: 500px;
+        margin: 0 auto;
+        text-align: center;
+        
+        form button, form input[type="submit"], .btn {
+            background: linear-gradient(135deg, $accent-orange 0%, darken($accent-orange, 15%) 100%) !important;
+            color: #ffffff !important;
+            border: none !important;
+            border-radius: 10px !important;
+            padding: 0.75rem 2.5rem !important; 
+            font-weight: 700 !important;
+            font-size: 1rem !important; 
+            text-transform: uppercase !important;
+            letter-spacing: 1px !important;
+            box-shadow: 0 4px 15px rgba(237, 137, 54, 0.3) !important;
+            transition: all 0.3s ease !important;
+
+            &:hover {
+                transform: translateY(-2px) !important;
+                box-shadow: 0 8px 20px rgba(237, 137, 54, 0.5) !important;
+                background: linear-gradient(135deg, lighten($accent-orange, 10%) 0%, $accent-orange 100%) !important;
+            }
+        }
+    }
+
+    // =========================
+    // Fix: Prevent Nested Boxes
+    // =========================
+    .login-wrapper, #region-main {
+        .card, .box, .generalbox, .login-wrapper {
+            .generalbox, #notice, .card, .box {
+                background: transparent !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                border: none !important;
+                box-shadow: none !important;
+            }
+        }
+    }
+}
+
+// ==========================================
+// 26. Custom Course Page Banner
+// ==========================================
+.academy-course-banner-wrapper {
+    background: linear-gradient(135deg, $accent-orange 0%, $primary-navy 30%) !important; 
+    position: relative;
+    padding: 3.5rem 0 4.5rem 0;
+    margin-bottom: 2rem;
+
+    // The inner container holding the content
+    .banner-inner {
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        position: relative;
+        gap: 3rem;
+        
+        @media (max-width: 991px) {
+            flex-direction: column;
+        }
+    }
+
+    // Left Side: Course Info
+    .banner-course-info {
+        flex: 1;
+        display: flex;
+        gap: 1.5rem;
+        color: #ffffff;
+        
+        @media (max-width: 767px) {
+            flex-direction: column;
+        }
+
+        .course-thumbnail {
+            width: 200px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            flex-shrink: 0;
+            
+            @media (max-width: 767px) {
+                width: 100%;
+                height: 180px;
+            }
+        }
+
+        .course-details {
+            .meta-row {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                margin-bottom: 0.5rem;
+                
+                .category-text {
+                    font-size: 0.85rem;
+                    color: #93C5FD; // Light blue text
+                    font-weight: 500;
+                }
+                
+                .academy-badge {
+                    font-size: 0.7rem;
+                    padding: 0.25rem 0.75rem;
+                    border-radius: 20px;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    
+                    &.progress-badge { background-color: #1E3A8A; color: #ffffff; } 
+                    &.start-badge { background-color: #EF4444; color: #ffffff; }    
+                    &.free-badge { background-color: #22C55E; color: #ffffff; }     
+                    &.completed-badge { background-color: #10B981; color: #ffffff; }
+                }
+            }
+
+            .course-title {
+                font-size: 1.8rem;
+                font-weight: 700;
+                margin-bottom: 0.75rem;
+                color: #ffffff;
+            }
+
+            .course-excerpt {
+                font-size: 0.95rem;
+                color: #E2E8F0;
+                line-height: 1.5;
+                margin-bottom: 1rem;
+                max-width: 600px;
+                cursor: pointer; 
+                transition: color 0.2s ease; 
+                
+                &:hover {
+                    color: #ffffff; 
+                }
+            }
+
+            .view-content-link {
+                color: #ffffff;
+                font-weight: 600;
+                text-decoration: underline;
+                font-size: 0.9rem;
+                transition: color 0.2s ease;
+                
+                &:hover {
+                    color: $accent-orange;
+                }
+            }
+        }
+    }
+
+    // Right Side: Floating Instructor Card OVERWRITTEN HERE
+    .banner-floating-card-container {
+        width: 320px;
+        flex-shrink: 0;
+        position: relative;
+        z-index: 10;
+        
+        @media (max-width: 991px) {
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        .floating-card {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 1.5rem;
+            border: 1px solid #E2E8F0;
+            position: absolute; 
+            top: -20px;
+            width: 100%;
+            
+            @media (max-width: 991px) {
+                position: relative;
+                top: 0;
+            }
+            
+            .card-section-title {
+                font-size: 0.75rem;
+                font-weight: 800;
+                text-transform: uppercase;
+                color: #4B5563;
+                letter-spacing: 0.5px;
+                margin-bottom: 1.25rem;
+            }
+
+            .instructor-info {
+                display: flex;
+                align-items: flex-start;
+                justify-content: space-between;
+                margin-bottom: 1.5rem;
+
+                .instructor-details {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+
+                    img {
+                        width: 45px;
+                        height: 45px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+                    
+                    .name {
+                        font-weight: 700;
+                        color: #1A202C;
+                        font-size: 0.95rem;
+                        margin: 0 0 2px 0;
+                        line-height: 1.2;
+                    }
+                    .date {
+                        color: #94A3B8;
+                        font-size: 0.8rem;
+                        margin: 0;
+                    }
+                }
+
+                .chat-icon {
+                    color: $accent-orange;
+                    font-size: 1.3rem;
+                    cursor: pointer;
+                    transition: transform 0.2s;
+                    margin-top: 5px;
+                    &:hover { transform: scale(1.1); }
+                }
+            }
+
+            .enrolled-users {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 12px;
+                    margin-bottom: 1.5rem;
+                    cursor: pointer; /* Makes it clear it's clickable */
+                    transition: transform 0.2s ease, opacity 0.2s ease;
+                    
+                    &:hover {
+                        transform: translateY(-2px);
+                        opacity: 0.8;
+                    }
+
+                    .avatars {
+                        display: flex;
+                        img {
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 50%;
+                            border: 2px solid #fff;
+                            margin-left: -12px;
+                            &:first-child { margin-left: 0; }
+                        }
+                    }
+                    .text {
+                        font-size: 0.85rem;
+                        color: #64748B;
+                        font-weight: 500;
+                    }
+            }
+
+            .btn-status {
+                width: 100%;
+                background: #F1F5F9;
+                color: #64748B;
+                border: none;
+                font-weight: 600;
+                padding: 0.75rem;
+                border-radius: 8px;
+                margin-bottom: 0.75rem;
+                pointer-events: none; 
+                font-size: 0.95rem;
+            }
+
+            .btn-action {
+                width: 100%;
+                background: $accent-orange;
+                color: #ffffff;
+                border: none;
+                font-weight: 600;
+                padding: 0.75rem;
+                border-radius: 8px;
+                margin-bottom: 2rem;
+                transition: background 0.2s;
+                font-size: 0.95rem;
+                
+                &:hover {
+                    background: darken($accent-orange, 10%);
+                }
+            }
+
+            .course-includes-list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                
+                li {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    color: #4A5568;
+                    font-size: 0.9rem;
+                    margin-bottom: 0.85rem;
+                    
+                    i {
+                        color: #64748B;
+                        font-size: 1.1rem;
+                        width: 20px;
+                        text-align: center;
+                    }
+                    
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ==========================================
+// 27. Course Page Edge-to-Edge Layout Fix
+// ==========================================
+#page.academy-course-layout {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    
+    // Force the main container to span full screen width, flush against the navbar
+    .main-inner {
+        max-width: 100% !important;
+        width: 100% !important;
+        margin: 0 !important;          
+        padding: 0 !important;         
+        border-radius: 0 !important;   
+    }
+
+    // Re-constrain the actual Moodle course content below the banner
+    #page-content {
+        max-width: 1300px !important;
+        margin: 0 auto !important;
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+        
+        @media (max-width: 991px) {
+            padding-left: 1rem !important;
+            padding-right: 1rem !important;
+        }
+    }
+}
+
+// ==========================================
+// 28. Course Page Overview & Layout Grid
+// ==========================================
+
+// Dynamic highlight class for the Learning Path scroll trigger
+.academy-section-highlight {
+    box-shadow: 0 0 0 3px $accent-orange, 0 10px 20px rgba(0,0,0,0.05) !important;
+    transition: box-shadow 0.4s ease;
+}
+
+// Spacer to keep the banner balanced
+.academy-course-banner-wrapper .banner-inner .banner-right-spacer {
+    width: 320px;
+    flex-shrink: 0;
+    @media (max-width: 991px) { display: none; }
+}
+
+.course-content-grid {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+    padding-top: 1rem;
+    padding-bottom: 4rem;
+
+    @media (max-width: 991px) {
+        flex-direction: column;
+    }
+
+    .course-left-column {
+        flex: 1;
+        min-width: 0; 
+        
+        /* NEW: Force this to the bottom on mobile */
+        @media (max-width: 991px) {
+            order: 2; 
+        }
+    }
+
+    .course-right-column {
+        width: 320px;
+        flex-shrink: 0;
+
+        @media (max-width: 991px) {
+            width: 100%;
+            
+            /* NEW: Force this to the top on mobile */
+            order: 1; 
+        }
+
+        // FLOATING CARD STYLES DIRECTLY IN THE RIGHT COLUMN
+        .banner-floating-card-container {
+            width: 100%;
+            margin-top: -240px; // Pulls it up over the blue banner
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 10;
+            
+            @media (max-width: 991px) {
+                margin-top: 0;
+            }
+
+            .floating-card {
+                background: #ffffff;
+                border-radius: 16px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+                padding: 1.5rem;
+                border: 1px solid #E2E8F0;
+                position: relative;
+                width: 100%;
+                
+                .card-section-title {
+                    font-size: 0.75rem;
+                    font-weight: 800;
+                    text-transform: uppercase;
+                    color: #4B5563;
+                    letter-spacing: 0.5px;
+                    margin-bottom: 1.25rem;
+                }
+
+                .instructor-info {
+                    display: flex;
+                    align-items: flex-start;
+                    justify-content: space-between;
+                    margin-bottom: 1.5rem;
+
+                    .instructor-details {
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+
+                        img {
+                            width: 45px;
+                            height: 45px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                        }
+                        
+                        .name {
+                            font-weight: 700;
+                            color: #1A202C;
+                            font-size: 0.95rem;
+                            margin: 0 0 2px 0;
+                            line-height: 1.2;
+                        }
+                        .date {
+                            color: #94A3B8;
+                            font-size: 0.8rem;
+                            margin: 0;
+                        }
+                    }
+
+                    .chat-icon {
+                        color: $accent-orange;
+                        font-size: 1.3rem;
+                        cursor: pointer;
+                        transition: transform 0.2s;
+                        margin-top: 5px;
+                        &:hover { transform: scale(1.1); }
+                    }
+                }
+
+                .enrolled-users {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 12px;
+                    margin-bottom: 1.5rem;
+
+                    .avatars {
+                        display: flex;
+                        img {
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 50%;
+                            border: 2px solid #fff;
+                            margin-left: -12px;
+                            &:first-child { margin-left: 0; }
+                        }
+                    }
+                    .text {
+                        font-size: 0.85rem;
+                        color: #64748B;
+                        font-weight: 500;
+                    }
+                }
+
+                .btn-status {
+                    width: 100%;
+                    background: #F1F5F9;
+                    color: #64748B;
+                    border: none;
+                    font-weight: 600;
+                    padding: 0.75rem;
+                    border-radius: 8px;
+                    margin-bottom: 0.75rem;
+                    pointer-events: none; 
+                    font-size: 0.95rem;
+                }
+
+                .btn-action {
+                    width: 100%;
+                    background: $accent-orange;
+                    color: #ffffff;
+                    border: none;
+                    font-weight: 600;
+                    padding: 0.75rem;
+                    border-radius: 8px;
+                    margin-bottom: 2rem;
+                    transition: background 0.2s;
+                    font-size: 0.95rem;
+                    
+                    &:hover {
+                        background: darken($accent-orange, 10%);
+                    }
+                }
+
+                .course-includes-list {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                    
+                    li {
+                        display: flex;
+                        align-items: center;
+                        gap: 12px;
+                        color: #4A5568;
+                        font-size: 0.9rem;
+                        margin-bottom: 0.85rem;
+                        
+                        i {
+                            color: #64748B;
+                            font-size: 1.1rem;
+                            width: 20px;
+                            text-align: center;
+                        }
+                        
+                        &:last-child {
+                            margin-bottom: 0;
+                        }
+                    }
+                }
+            }
+        }
+
+        .progress-card {
+            background: #ffffff;
+            border-radius: 12px;
+            border: 1px solid #E2E8F0;
+            padding: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+
+            .card-section-title {
+                font-size: 0.7rem;
+                font-weight: 800;
+                text-transform: uppercase;
+                color: #4B5563;
+                letter-spacing: 0.5px;
+            }
+        }
+    }
+}
+
+// Styling for the Left Column Content
+.course-overview-block {
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1A202C;
+        margin-bottom: 1.25rem;
+    }
+
+    .overview-text {
+        color: #4A5568;
+        font-size: 0.95rem;
+        line-height: 1.7;
+        margin-bottom: 1rem;
+        transition: max-height 0.3s ease;
+        
+        p { margin-bottom: 1rem; }
+
+        // Dynamic classes added via JS
+        &.clamped {
+            display: -webkit-box;
+            -webkit-line-clamp: 7; // Restored to 7 lines per request
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            cursor: pointer; // Indicates the text itself is clickable
+        }
+
+        &.expanded {
+            display: block;
+            cursor: pointer;
+        }
+    }
+
+    .show-more-link {
+        color: #111827;
+        font-weight: 700;
+        font-size: 0.9rem;
+        text-decoration: underline;
+        display: inline-block;
+        margin-bottom: 2rem;
+        cursor: pointer;
+        
+        &:hover { color: $accent-orange; }
+        
+        &.hidden {
+            display: none !important;
+        }
+    }
+
+    .rating-box {
+        background-color: #F8FAFC;
+        border-radius: 8px;
+        padding: 1rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        
+        .stars {
+            color: $accent-orange;
+            font-size: 1.1rem;
+        }
+        .read-reviews-link {
+            color: $accent-orange;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: underline;
+        }
+    }
+}
+
+.topics-covered-block {
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1A202C;
+        margin-bottom: 1.25rem;
+    }
+    .topic-item {
+        color: #4A5568;
+        font-size: 0.9rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 0.75rem;
+
+        i {
+            color: #22C55E; // Green check
+            margin-top: 4px;
+        }
+    }
+}
+
+// ==========================================
+// 29. Precision Star Ratings (Percentage-based)
+// ==========================================
+.academy-star-rating {
+    position: relative;
+    display: inline-block;
+    font-size: 1.1rem;
+    line-height: 1;
+    vertical-align: middle;
+
+    .stars-empty {
+        color: #E2E8F0; /* Light grey base stars */
+    }
+
+    .stars-filled {
+        position: absolute;
+        top: 0;
+        left: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        color: $accent-orange; /* Orange fill */
+    }
+
+    i.fa-star {
+        margin-right: 2px; /* Slight spacing between stars */
+    }
+}
+
+// ==========================================
+// 30. Course Page Visual Timeline
+// ==========================================
+.course-timeline-block {
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1A202C;
+        margin-bottom: 2rem;
+    }
+
+    .course-timeline {
+        position: relative;
+        padding-left: 20px;
+
+        // The vertical line
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 35px;
+            width: 2px;
+            background-color: #E2E8F0;
+            z-index: 1;
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-left: 50px;
+            padding-bottom: 2.5rem;
+            z-index: 2;
+            cursor: pointer; // Makes it clear it is clickable
+
+            // SCSS logic for the Completed state (Number remains visible)
+            &.is-completed {
+                .timeline-node {
+                    background-color: #10B981; // Green node
+                    color: #ffffff; // Keep the number visible
+                }
+                .timeline-content {
+                    border-left: 4px solid #10B981; // Green accent line
+                }
+            }
+
+            &:last-child {
+                padding-bottom: 0;
+                // Cut off the vertical line at the last item
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 32px;
+                    bottom: 0;
+                    left: 15px;
+                    width: 4px;
+                    background-color: #ffffff;
+                }
+            }
+
+            .timeline-node {
+                position: absolute;
+                left: -1px;
+                top: 0;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                background-color: $accent-orange;
+                color: #ffffff;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: 700;
+                font-size: 0.85rem;
+                box-shadow: 0 0 0 4px #ffffff;
+                transition: transform 0.2s ease;
+            }
+
+            .timeline-content {
+                background-color: #F8FAFC;
+                border: 1px solid #E2E8F0;
+                border-radius: 8px;
+                padding: 1rem 1.25rem;
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+                
+                &:hover {
+                    transform: translateX(4px);
+                    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+                    border-color: #CBD5E1;
+                }
+
+                .topic-title {
+                    font-size: 1.05rem;
+                    font-weight: 700;
+                    color: #1A202C;
+                    margin-bottom: 0.25rem;
+                }
+
+                .topic-meta {
+                    font-size: 0.8rem;
+                    color: #64748B;
+                    font-weight: 500;
+                    
+                    i { margin-right: 4px; }
+                }
+            }
+        }
+    }
+}
+
+// ==========================================
+// 31. Custom Course Content Accordion
+// ==========================================
+.academy-course-accordion {
+    .accordion-item {
+        border: 1px solid #E2E8F0 !important;
+        border-radius: 8px !important;
+        overflow: hidden;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+    }
+    
+    .accordion-button {
+        background-color: #F8FAFC;
+        color: #1A202C;
+        box-shadow: none !important;
+        padding: 1.25rem 1.5rem;
+        
+        /* Flex hack to move the arrow to the left side */
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+        
+        &::after {
+            margin-left: 0;
+            margin-right: 0.5rem;
+            color: #1A202C;
+            background-size: 1rem; /* Slightly smaller arrow */
+        }
+        
+        &:focus {
+            outline: none !important;
+            box-shadow: none !important;
+        }
+
+        /* When the accordion is expanded */
+        &:not(.collapsed) {
+            background-color: #F8FAFC;
+            color: #1A202C;
+            box-shadow: none !important;
+        }
+    }
+
+    .accordion-body {
+        background-color: #ffffff;
+    }
+
+    .activity-row {
+        /* Add a subtle line between items, but not the last one */
+        &:not(:last-child) {
+            border-bottom: 1px solid #F3F4F6;
+        }
+
+        .activity-link {
+            transition: color 0.2s ease;
+            &:hover {
+                color: $accent-orange !important; /* Orange hover state */
+            }
+        }
+    }
+}
+
+// ==========================================
+// 32. Course Reviews Block
+// ==========================================
+.course-reviews-block {
+    .review-item {
+        /* Force long, unbroken text strings to wrap to the next line */
+        word-break: break-word; 
+        overflow-wrap: break-word; 
+        
+        &:last-of-type {
+            border-bottom: none !important;
+            padding-bottom: 0.5rem !important;
+        }
+
+        /* NEW: Clamping and expansion for review text (3 lines) */
+        .review-text-content {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            cursor: pointer;
+            transition: max-height 0.3s ease;
+            
+            &.expanded {
+                display: block;
+                -webkit-line-clamp: unset;
+            }
+        }
+    }
+
+    .btn-show-more-reviews {
+        background-color: #ffffff;
+        border: 1px solid #CBD5E1;
+        color: #64748B;
+        font-weight: 600;
+        border-radius: 6px;
+        transition: all 0.2s ease;
+
+        &:hover, &:focus {
+            border-color: #94A3B8;
+            color: #475569;
+            background-color: #F8FAFC;
+            box-shadow: none;
+            outline: none;
+        }
+    }
+}
+
+// ==========================================
+// 33. Restrict Native Moodle Content Bleed
+// ==========================================
+.course-content-grid {
+    .course-left-column {
+        // Force the column to never exceed its flex boundary (100% - 320px right column - 3rem gap)
+        max-width: calc(100% - 320px - 3rem);
+        
+        @media (max-width: 991px) {
+            max-width: 100%;
+        }
+
+        // Strip any negative margins or forced widths from native Moodle elements
+        .alert, 
+        .availabilityinfo, 
+        .activity-information,
+        .activity-item,
+        .course-content,
+        .topics {
+            max-width: 100% !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            box-sizing: border-box !important;
+            overflow-wrap: break-word !important;
+        }
+    }
+}
+
+// ==========================================
+// Custom News PHP Layouts
+// ==========================================
+
+// Thick top border for the article reader page
+.academy-news-card {
+    border-top: 5px solid $accent-orange !important;
+}
+
+// Hover effects for the News Archive list items
+.academy-list-item {
+    transition: all 0.2s ease;
+    
+    &:hover, &:focus {
+        transform: translateX(5px);
+        background-color: rgba($accent-orange, 0.05) !important;
+        border-color: rgba($accent-orange, 0.2) !important;
+        
+        .item-title {
+            color: $accent-orange !important;
+        }
+    }
+}
+
+// ==========================================
+// Custom Leaderboard & Admin Styles
+// ==========================================
+
+// Leaderboard Top Banner Gradient
+.academy-lb-header {
+    background: linear-gradient(135deg, $primary-navy 0%, $accent-orange 100%) !important;
+}
+
+// Leaderboard Logged-In User Highlight Row
+.academy-highlight-row {
+    border-left: 4px solid $accent-orange !important;
+    background-color: rgba($accent-orange, 0.05) !important;
+}
+
+// Floating Admin Purge Button
+.academy-global-purge a:hover {
+    transform: translateY(-3px);
+    background-color: $accent-orange !important;
+    box-shadow: 0 10px 25px rgba($accent-orange, 0.4) !important;
+    color: #ffffff !important;
+    
+    .fa-spin-hover {
+        animation: fa-spin 2s infinite linear;
+    }
+}
+
+// ==========================================
+// 34. Course Index Active Item (Dynamic Color)
+// ==========================================
+.courseindex {
+    .courseindex-item.pageitem {
+        // Dynamically creates a 10% transparent background tint
+        background-color: rgba($accent-orange, 0.1) !important;
+
+        .courseindex-link,
+        .courseindex-name {
+            color: darken($accent-orange, 5%) !important;
+            font-weight: 600;
+        }
+        
+        // Ensures the little page/activity icon matches too
+        .icon {
+            color: $accent-orange !important;
+        }
+    }
+}
+
+// ==========================================
+// 35. "My Courses" Page Restyling
+// ==========================================
+body#page-my-courses {
+    
+    // 1. Remove the harsh white background from the main container
+    .main-inner {
+        background-color: transparent !important;
+        box-shadow: none !important;
+        padding-top: 1rem !important;
+    }
+
+    // 2. Style the Page Title
+    .page-header-headings h1 {
+        font-weight: 800;
+        color: $primary-navy;
+        font-size: 2rem;
+    }
+
+    // 3. Style the Filter & Search Bar Area
+    [data-region="filter"] {
+        background: #ffffff;
+        padding: 1.25rem;
+        border-radius: 12px;
+        border: 1px solid #E2E8F0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        margin-bottom: 2rem;
+
+        .input-group {
+            border: 1px solid #E2E8F0 !important;
+            border-radius: 8px !important;
+            background-color: #F8FAFC !important;
+            overflow: hidden;
+
+            input.form-control {
+                background: transparent !important;
+                border: none !important;
+                box-shadow: none !important;
+                &:focus {
+                    box-shadow: none !important;
+                }
+            }
+            
+            &:focus-within {
+                border-color: $accent-orange !important;
+                box-shadow: 0 0 0 3px rgba($accent-orange, 0.2) !important;
+            }
+        }
+
+        .custom-select, select {
+            border-radius: 8px !important;
+            border: 1px solid #E2E8F0 !important;
+            background-color: #F8FAFC !important;
+            color: #4A5568 !important;
+            
+            &:focus {
+                border-color: $accent-orange !important;
+                box-shadow: 0 0 0 3px rgba($accent-orange, 0.2) !important;
+                outline: none !important;
+            }
+        }
+    }
+
+    // 4. Transform Moodle's native cards into Academy Cards
+    .dashboard-card-deck {
+        .dashboard-card {
+            border: 1px solid #E2E8F0 !important; 
+            border-radius: 12px !important;       
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;
+            background-color: #ffffff !important;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 12px 24px rgba(0,0,0,0.08) !important;
+            }
+
+            .card-img-top {
+                border-radius: 11px 11px 0 0 !important; 
+                height: 150px;
+                object-fit: cover;
+            }
+
+            .card-body {
+                padding: 1.25rem !important;
+
+                .text-muted {
+                    font-size: 0.75rem;
+                    color: #94A3B8 !important;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    letter-spacing: 0.5px;
+                }
+
+                .coursename {
+                    font-weight: 700 !important;
+                    color: #1A202C !important; 
+                    font-size: 1.1rem;
+                    line-height: 1.3;
+                    margin-top: 0.5rem;
+                    margin-bottom: 1rem;
+                }
+
+                // Progress Bar & Percentage
+                .progress {
+                    height: 6px !important;
+                    border-radius: 6px !important;
+                    background-color: #E2E8F0 !important;
+                    margin-top: 0.5rem;
+                    
+                    .progress-bar {
+                        background-color: $primary-navy !important; 
+                        border-radius: 6px !important;
+                    }
+                }
+
+                .small, .progress-text {
+                    font-weight: 700;
+                    color: $primary-navy !important;
+                    font-size: 0.85rem;
+                }
+            }
+
+            // Style the Three-Dots Menu on cards
+            .dropdown-toggle {
+                color: #A0AEC0 !important;
+                &:hover { color: $accent-orange !important; }
+            }
+        }
+    }
+}
+
+#notification {
+    background: $accent-orange !important;
+}
+
+body.limitedwidth #page.drawers .main-inner {
+    max-width: 100%;
+}

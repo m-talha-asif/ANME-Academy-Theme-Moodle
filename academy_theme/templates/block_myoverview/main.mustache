@@ -1,0 +1,66 @@
+{{!
+    @template block_myoverview/main
+}}
+<div id="block-myoverview-{{uniqid}}" class="block-myoverview block-cards" data-region="myoverview">
+    
+    <div class="d-flex justify-content-between align-items-center mb-4 mt-2">
+        <div class="d-flex align-items-baseline">
+            <h3 class="fw-bold m-0 me-3 academy-primary-text">{{#str}} show_learning_programs, theme_academy_theme {{/str}}</h3>
+            <span class="text-muted fw-bold d-none d-sm-inline">{{#str}} mycourses, core {{/str}}</span>
+        </div>
+        <div class="academy-carousel-controls">
+            <button class="btn rounded-circle me-2 carousel-btn-left"><i class="fa fa-chevron-left"></i></button>
+            <button class="btn rounded-circle carousel-btn-right"><i class="fa fa-chevron-right"></i></button>
+        </div>
+    </div>
+
+    <div class="d-none">
+        <div role="search" data-region="filter" class="d-flex align-items-center my-2" aria-label="{{#str}} aria:controls, block_myoverview {{/str}}">
+            <div class="d-flex flex-wrap gap-1 align-items-center w-100">
+                {{> block_myoverview/nav-grouping-selector }}
+                {{> block_myoverview/nav-sort-selector }}
+                {{> block_myoverview/nav-search-widget }}
+                {{#displaydropdown}}
+                    {{> block_myoverview/nav-display-selector }}
+                {{/displaydropdown}}
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid p-0 academy-course-carousel">
+        {{> block_myoverview/courses-view }}
+    </div>
+</div>
+{{#js}}
+require(['jquery', 'block_myoverview/main'], function($, Main) {
+    var root = $('#block-myoverview-{{uniqid}}');
+    Main.init(root);
+
+    function getScrollContainer() {
+        var $candidates = root.find('.academy-course-carousel').find('[data-region="paged-content-page"], .card-deck, .dashboard-card-deck, .row, > div');
+        return $candidates.filter(function() {
+            return $(this).css('overflow-x') === 'auto' || $(this).css('overflow-x') === 'scroll';
+        }).first();
+    }
+
+    root.off('click', '.carousel-btn-left, .carousel-btn-right');
+    
+    root.on('click', '.carousel-btn-right', function(e) {
+        e.preventDefault();
+        var container = getScrollContainer();
+        if (container.length) {
+            var currentPos = container.scrollLeft();
+            container.stop().animate({ scrollLeft: currentPos + 340 }, 300);
+        }
+    });
+
+    root.on('click', '.carousel-btn-left', function(e) {
+        e.preventDefault();
+        var container = getScrollContainer();
+        if (container.length) {
+            var currentPos = container.scrollLeft();
+            container.stop().animate({ scrollLeft: currentPos - 340 }, 300);
+        }
+    });
+});
+{{/js}}
