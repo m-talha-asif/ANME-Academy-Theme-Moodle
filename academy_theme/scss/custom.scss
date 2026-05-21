@@ -3158,30 +3158,3 @@ body#page-my-courses {
 body.limitedwidth #page.drawers .main-inner {
     max-width: 100%;
 }
-
-// ==========================================
-// Course Category Grid Override
-// ==========================================
-.course_category_tree .courses,
-.category-browse .courses {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-    
-    // Reset Moodle's default course wrapper so it doesn't break our card
-    .coursebox.academy-coursebox-override {
-        padding: 0 !important;
-        margin: 0 !important;
-        border: none !important;
-        background: transparent !important;
-        box-shadow: none !important;
-        width: 100%;
-        
-        // Ensure the card takes full height of the grid cell
-        .card.academy-card {
-            height: 100% !important;
-            margin: 0 !important;
-        }
-    }
-}
