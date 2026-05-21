@@ -3158,3 +3158,120 @@ body#page-my-courses {
 body.limitedwidth #page.drawers .main-inner {
     max-width: 100%;
 }
+
+// ==========================================
+// Course Category Grid Override
+// ==========================================
+.course_category_tree .courses,
+.category-browse .courses {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    
+    // Reset Moodle's default course wrapper so it doesn't break our card
+    .coursebox.academy-coursebox-override {
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        width: 100%;
+        
+        // Ensure the card takes full height of the grid cell
+        .card.academy-card {
+            height: 100% !important;
+            margin: 0 !important;
+        }
+    }
+}
+
+// ==========================================
+// Course Category Grid Override (With Grid/List Toggle)
+// ==========================================
+.course_category_tree .courses,
+.category-browse .courses {
+    display: grid !important;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    
+    // Reset Moodle's default course wrapper so it doesn't break our card
+    .coursebox.academy-coursebox-override {
+        padding: 0 !important;
+        margin: 0 !important;
+        border: none !important;
+        background: transparent !important;
+        box-shadow: none !important;
+        width: 100%;
+        
+        // Default Grid Card View
+        .card.academy-card {
+            height: 100% !important;
+            margin: 0 !important;
+            padding: 1rem !important; 
+            
+            .academy-card-img {
+                height: 140px;
+                width: 100%;
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                border-radius: 8px !important; 
+                background-color: #F3F4F6;
+                display: block; 
+            }
+        }
+    }
+
+    // --- LIST VIEW OVERRIDE ---
+    &.academy-list-view {
+        display: flex !important;
+        flex-direction: column !important;
+
+        .coursebox.academy-coursebox-override {
+            .card.academy-card {
+                flex-direction: row !important;
+                padding: 0 !important; // Remove padding so the image touches the edges
+                overflow: hidden;
+                
+                // Fallback to standard cards on mobile screens
+                @media (max-width: 767px) {
+                    flex-direction: column !important; 
+                    padding: 1rem !important;
+                }
+
+                // Image Wrapper sizing for horizontal view
+                > a.d-block {
+                    width: 280px;
+                    margin-bottom: 0 !important;
+                    flex-shrink: 0;
+
+                    @media (max-width: 767px) {
+                        width: 100%;
+                        margin-bottom: 1rem !important;
+                    }
+
+                    .academy-card-img {
+                        height: 100% !important;
+                        min-height: 180px;
+                        border-radius: 0 !important; // Flat edges on the left side
+                        
+                        @media (max-width: 767px) {
+                            border-radius: 8px !important;
+                            height: 140px !important;
+                            min-height: 140px;
+                        }
+                    }
+                }
+
+                // Content Wrapper vertical centering
+                .card-content {
+                    padding: 1.5rem 2rem !important;
+                    flex-grow: 1;
+                    justify-content: center;
+                }
+            }
+        }
+    }
+}
